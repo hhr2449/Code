@@ -54,6 +54,10 @@ insert a footnote
 |fsdfwe|100|
 //insert a table
 
+- [x] 这个是可以打勾的列表
+
+
+
 
 
 [^1]:sfsdfsa
