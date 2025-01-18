@@ -6,7 +6,7 @@ int main(){
     }
     change(v);
     for (int i = 0; i < v.size(); i++) {
-        std::cout << v[i] << std::endl;
+        std::cout << v[i]+10086 << std::endl;
     }
     return 0;
 }
