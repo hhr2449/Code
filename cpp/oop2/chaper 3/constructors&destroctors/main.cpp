@@ -10,7 +10,7 @@ class Person{
     }
 };
 int main(){
-    Person p;//创建对象，调用析构函数
+    Person p;//创建对象，自动调用构造函数
     system("pause");//程序在这里停止，此时还没有调用析构函数
     return 0;//程序运行结束时对象销毁，调用析构函数
 }
