@@ -43,12 +43,16 @@ void test01(){
     p3.show();//输出p3，发现与p2相同
     //!注意 Person p();这行代码是在声明一个Person类型的函数，不是在创建一个对象，不要将缺省构造函数或者默认构造函数写成这样
     
-    //3. 隐式转换法
+
 }
 void test02(){
 //2. 显式转换法
     Person p4=Person(19,"李四");//有参构造
     Person p5=Person(p4); //拷贝构造
+}
+void test03(){
+    //3. 隐式转换法
+    //就是显示转换法基础上省略后面的Person()
 }
 int main() {
 
@@ -57,7 +61,6 @@ int main() {
     test02();
     cout << "-------------" << endl;
     Person(10,"王五");//这是一个匿名对象，会马上创建马上销毁
-    Person(p2);
     system("pause");
     return 0;
 
