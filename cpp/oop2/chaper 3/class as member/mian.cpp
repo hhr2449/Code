@@ -7,7 +7,7 @@ class Phone{
     Phone(string brand) 
     : m_Brand(brand)
     {
-        cout << "Phone 构造函数 brand: " << '\n';
+        cout << "Phone 构造函数" << '\n';
     }
     ~Phone(){
         cout << "phone 析构函数" << '\n';
@@ -39,6 +39,7 @@ class Person{
 void test01(){
     Person p("张三","iPhone X");
 }
+//成员对象先构造，对象本身再构造，对象本身先析构，成员对象再析构
 int main(){
     test01();
 }
