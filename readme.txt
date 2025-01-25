@@ -10,7 +10,7 @@
 2.多文件的运行要从右上角的图标处进行，不能使用F5,F6（不知道为什么）
 3.编码设置为uft8，
 setting.json增加
- // 设置终端的参数，编码格式等//这里再修改终端的编码格式为utf-8
+ 设置终端的参数，编码格式等这里再修改终端的编码格式为utf-8
     "terminal.integrated.profiles.windows": {
         "Command Prompt": {
             "path": "C:\\Windows\\System32\\cmd.exe",
