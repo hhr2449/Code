@@ -41,7 +41,7 @@ void test03(){
     Person p1(10);
     Person p2(20);
     p1.setName("tom").addAge2(p2).addAge2(p2).addAge2(p2);
-
+    //此时p1.setName("tom").addAge2(p2)返回的是p1的副本，后续是在副本上进行相加而不是原来的p1
     cout << p1.m_Name << "的年龄为" << p1.age << '\n';
 }
 
