@@ -10,7 +10,7 @@ class Building{
     string m_BedRoom = "卧室";
     public:
     string m_SittingRoom = "客厅";
-    friend void goodFriend(Building*building);
+    friend void goodFriend(Building*building);//定义类的时候将函数声明为friend
     //这里将goodFriend设置为Building类的友元函数，可以访问私有属性
 };
 void goodFriend(Building*building){
