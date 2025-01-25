@@ -47,7 +47,17 @@ void test02(){
 }
 
 //!3.值方式返回局部对象
-//!在比较新版本的编译器中，以值方式返回局部对象不会调用构造函数，返回的是原来的哪一个
+//!在比较新版本的编译器中，以值方式返回局部对象不会调用构造函数
+// RVO 示例
+// MyClass createTempObject() {
+//     return MyClass();
+// }
+
+// NRVO 示例
+// MyClass createNamedObject() {
+//     MyClass obj;
+//     return obj;
+// }
 
 Person doWork02(){
     Person p(10);

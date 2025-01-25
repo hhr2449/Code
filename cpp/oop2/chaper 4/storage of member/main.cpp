@@ -1,10 +1,10 @@
 //只有非静态的成员变量才是单独存储在对象的内存中
-//空对象
+//对象占用的内存空间几位非静态成员变量占用的内存空间之和，如果没有非静态成员变量，那么就是1
 #include<iostream>
 using namespace std;
 class Person{
     public:
-    //int m_A;
+    int m_A;
     static int m_B;
     void func(){
 
