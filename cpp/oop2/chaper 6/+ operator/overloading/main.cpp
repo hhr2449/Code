@@ -5,6 +5,11 @@ class Person{
         int m_A;
        
 };
+Person operator+(const Person& p,const Person& p2){
+    Person temp;   
+    temp.m_A = p2.m_A + p.m_A;                            
+    return temp;
+ }
 Person operator+(const Person& p,int num){//运算符重载也可以发生函数重载
     Person temp;   
     temp.m_A = p.m_A + num;                            
