@@ -25,7 +25,8 @@ class MyInteger{
     }
 
     friend ostream& operator<<(ostream& out ,const MyInteger& mi);//如果形参是MyInteger& mi，那么只能接受引用，不能接受值（一般的引用只能接受变量），改成常引用就可以接受值
-
+                                                                  //或者将参数改成MyInteger mi也可以
+                                                                  //类比int的情况：参数是int，可以直接传10这个数，可以令int a = 10,传a进去，但是参数是int &时，只能传递变量（因为常量没有办法取地址）
 };
 ostream& operator<<(ostream& out ,const MyInteger& mi){
     out << "MyInt = " << mi.MyInt;
