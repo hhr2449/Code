@@ -17,7 +17,7 @@ void test01(){
     mp("hello world");
     MyAdd ma;
     cout << ma(10,20) << '\n';
-    cout << MyAdd()(10,20) << '\n';
+    cout << MyAdd()(10,20) << '\n';//MyAdd()是一个匿名对象，使用匿名对象调用仿函数
 }
 int main(){
     test01();
