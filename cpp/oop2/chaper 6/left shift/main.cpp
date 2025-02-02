@@ -12,11 +12,11 @@ class Person{
         m_A = a;
         m_B = b;
     }
-    friend ostream& operator<<(ostream& cout,Person& p);//将其设置为友元，可以输出私有属性
+    friend ostream& operator<<(ostream& cout,const Person& p);//将其设置为友元，可以输出私有属性
 };
 //进行左移运算符重载，实际上就是要定义一个函数oprator<<,实现简化调用cout << p1的操作,可以展开为operator<<(cout,p1)
 //!不利用成员函数进行<<运算符重载，因为那样就只能写成p1 << cout。
-ostream& operator<<(ostream& cout,Person& p){//可以不写成cout，形参的名字可以任意取
+ostream& operator<<(ostream& cout,const Person& p){//可以不写成cout，形参的名字可以任意取
     cout << "m_A = " << p.m_A << " m_B = " << p.m_B;//输出对象的属性（可以cout已经在库中定义的数据类型）
     return cout;//返回一个cout的引用
 }
