@@ -31,7 +31,7 @@
 #### //use tab to achive mutiple lists  
 
 > fsdffsefc　　//declare citation
-```
+```c++
 #include<iostream>
 using namespce std;
 int main(){
@@ -48,8 +48,8 @@ world[^1]
 insert a footnote  
 ![photo](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Visual_Studio_Code_1.35_icon.png/180px-Visual_Studio_Code_1.35_icon.png)  
 //insert a photo  
-|name|age|
-|----|----|
+|name|age|score|s|
+|----|----|----|-----|
 |damong|12|
 |fsdfwe|100|
 //insert a table
