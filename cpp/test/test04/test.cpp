@@ -1,5 +1,5 @@
 #include<iostream>
 using namespace std;
 int main(){
-    cout << "ä½ é©¬å…‹æ€" << endl;
+    cout << "¿ÉÊÇµ±Äê" << endl;
 }
