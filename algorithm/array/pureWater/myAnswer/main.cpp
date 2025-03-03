@@ -5,7 +5,7 @@ class cup{
     public:
     int a = 8,b = 0,c = 0;
 };
-int note[9][6][4] = {0,0,0};
+int note[9][6][4] = {0};//这样才是正确的全部初始化为0
 vector<cup> Cup(100);
 void pure(int k){
     if(Cup[k].a==4&&Cup[k].b==4){
@@ -25,7 +25,7 @@ void pure(int k){
             if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
                 note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
                 pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
+                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;//这里需要回溯，note的作用是防止出现死循环（同一条路径中出现相同的状态），但是不是同一条路径下出现同样的状态是允许的
             }
         }
         else{

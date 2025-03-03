@@ -1,3 +1,1 @@
-#include<iostream>
-#include<vector>
-void change(std::vector<int> &v);
+extern int c[5];
