@@ -1,90 +1,16 @@
 #include<iostream>
-#include<vector>
 using namespace std;
-class cup{
-    public:
-    int a = 8,b = 0,c = 0;
-};
-int note[9][6][4] = {0,0,0};
-vector<cup> Cup(100);
-void pure(int k){
-    if(Cup[k].a==4&&Cup[k].b==4){
-        for(int i = 0;i<=k;i++){
-            cout << '(' << Cup[i].a << ',' << Cup[i].b << ',' << Cup[i].c << ')' << '\n';
-        }
-        return; 
+bool isPrime(int n){
+    if(n==1){
+        return true;
     }
-    if(note[Cup[k].a][Cup[k].b][Cup[k].c]==-1){
-        return;
-    }
-    if(Cup[k].a!=0){
-        if(5-Cup[k].b>=Cup[k].a){
-            Cup[k+1] = Cup[k];
-            Cup[k+1].b += Cup[k].a;
-            Cup[k+1].a = 0;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
-        }
-        else{
-            Cup[k+1] = Cup[k];
-            Cup[k+1].a -= 5-Cup[k].b;
-            Cup[k+1].b = 5;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
+    for(int i = 1;i*i<=n;i++){
+        if(n%i==0){
+            return false;
         }
     }
-    if(Cup[k].b!=0){
-        if(3-Cup[k].c>=Cup[k].b){
-            Cup[k+1] = Cup[k];
-            Cup[k+1].c += Cup[k].b;
-            Cup[k+1].b = 0;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
-        }
-        else{
-            Cup[k+1] = Cup[k];
-            Cup[k+1].b -= 3-Cup[k].c;
-            Cup[k+1].c = 3;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
-        }
-    }
-    if(Cup[k].c!=0){
-        if(8-Cup[k].a>=Cup[k].c){
-            Cup[k+1] = Cup[k];
-            Cup[k+1].a += Cup[k].c;
-            Cup[k+1].c = 0;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
-        }
-        else{
-            Cup[k+1] = Cup[k];
-            Cup[k+1].c -= 8-Cup[k].a;
-            Cup[k+1].a = 8;
-            if(note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c]==0){
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 1;
-                pure(k+1);
-                note[Cup[k+1].a][Cup[k+1].b][Cup[k+1].c] = 0;
-            }
-        }
-    }
+    return true;
 }
 int main(){
-    pure(0);
-    return 0;
+    cout << isPrime(29);
 }
