@@ -7,7 +7,7 @@
 #include<string>
 #include<vector>
 using namespace std;
-vector<int> multi(const vector<int> &a,int n){
+vector<int> multi(const vector<int> &a,int n){//高精度乘法
     vector<int> c;
     int t = 0;
     for(int i = 0;i<a.size()||t;i++){
@@ -26,10 +26,11 @@ int main(){
     int b,c;
     cin >> n >> k;
     vector<int> v;
-    for(int i=0;i<k;i++){
+    for(int i=0;i<k;i++){//得到邻接矩阵
         cin >> b >> c;
         a[b][c]=1;
     }
+    //warshall算法求可达矩阵
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
             for(int k=0;k<10;k++){
@@ -41,17 +42,16 @@ int main(){
     }
     for(int i = 0;i<10;i++){
         a[i][i] = 1;
-    }
+    }//这道题目中保持自己也是一种，所以对角元为1
     
     int res[10] = {0};
     for(int i = 0;i<10;i++){
         for(int j = 0;j<10;j++){
             res[i]+=a[i][j];
         }
-    }
-    cout << res[2] << res[3] << '\n';
+    }//得到每一种数字的变化可能数
     v = {1};
-    for(int i = 0;i < n.size();i++){
+    for(int i = 0;i < n.size();i++){//遍历每一位，进行乘法
         v = multi(v,res[n[i]-'0']);
     }
     for(int i = v.size()-1;i>=0;i--){
