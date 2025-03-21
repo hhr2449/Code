@@ -1,3 +1,4 @@
+
 # learning markdown in vscode
 *sdjc*
 **csdc**   
@@ -16,7 +17,7 @@
 #### two way to input spaces:  
 1. &nbsp;sdf&ensp;safsa&ensp;&ensp;//using syntax in html :&nbsp; and &ensp;
 2. using shift+space to switch to full angle mode  
-
+---
 
 * efewf
     * kskwndkw
@@ -27,7 +28,7 @@
 1. sdsdfsd
     1. csdjkncsjkd
         1. ndajksnfasc
-
+---
 #### //use tab to achive mutiple lists  
 
 > fsdffsefc　　//declare citation
