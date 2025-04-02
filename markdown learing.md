@@ -1,6 +1,6 @@
 
 # learning markdown in vscode
-*sdjckndk*
+*sdjckk*
 **csdc**   
 ***sacsd***  //  use three * to intalicize and bold
 
