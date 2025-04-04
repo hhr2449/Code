@@ -19,7 +19,7 @@
 2. using shift+space to switch to full angle mode  
 ---
 
-* efewf
+* efew
     * kskwndkw
         * cnsakcnskd
             * skjdnfke
