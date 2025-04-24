@@ -1,0 +1,37 @@
+##Round 1, Ninja is coming!
+-------------------------
+Driving Dragon dragon.
+Using Fist weapon.          ///构造函数输出
+-------------------------
+Ninja is coming!
+Ninja is with Dragon and Fist. ///普通忍者的describe
+-------------------------
+Driving Fighting_Dragon dragon.
+Using Fire_Sword weapon.          ///构造函数输出
+--------------------------
+Fire ninja is coming!
+Fire ninja is with Fighting_Dragon and Fire_Sword.   ///火忍者的describe
+---------------------------
+I will burn the night!           ///专属能力
+----------------------------
+##Round 2, Ninja is coming!
+Driving Fighting_Dragon dragon.
+Using Fire_Sword weapon.
+Fire ninja is coming!
+Fire ninja is with Fighting_Dragon and Fire_Sword.
+I will burn the night!
+Driving Lucky_Dragon dragon.
+Using Ice_Heart weapon.
+Ice ninja is coming!
+Ice ninja is with Lucky_Dragon and Ice_Heart.
+You will be the dust of frozen bones!
+##Round 3, Ninja is coming!
+Driving Lucky_Dragon dragon.
+Using Ice_Heart weapon.
+Ice ninja is coming!
+Ice ninja is with Lucky_Dragon and Ice_Heart.
+You will be the dust of frozen bones!
+Driving Dragon dragon.
+Using Fist weapon.
+Ninja is coming!
+Ninja is with Dragon and Fist.

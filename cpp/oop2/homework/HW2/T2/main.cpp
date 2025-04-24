@@ -11,7 +11,6 @@ int main()
 	Test b;
 	//创建对象a,b，调用默认构造函数，输出this->buf的地址
 	cout << "------before call f1------" << endl;
-	
 	cout << "f1():" << endl;
 	Test A = f1(a);
 	//f1接受一个Test对象，返回一个Test对象

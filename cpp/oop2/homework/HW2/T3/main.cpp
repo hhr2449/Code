@@ -1,10 +1,9 @@
 //main.cpp
 #include "Factor.h"
 #include <iostream>
-
+using namespace std;
 int main()
 {
-    using namespace std;
     Factor A, B;
     cin >> A;
     cin >> B;
