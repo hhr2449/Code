@@ -1,12 +1,13 @@
 #include"fun.h"
+#include<iostream>
 using namespace std;
 int main()
 {
-	int n = 0,numa = 0,numb = 0,numc = 0;
+	int n = 0,numA = 0,numB = 0,numC = 0;
 	char pur = 'C', start = 'A', medium = 'B';
 	cin >> n;
-	numa = n;
-	cout << "A=" << numa << ' ' << "B=" << numb << ' ' << "C=" << numc << endl;
-	hanoi(n, start, medium, pur,numa,numb,numc);
+	numA = n;
+	cout << "A=" << numA << ' ' << "B=" << numB << ' ' << "C=" << numC << endl;
+	hanoi(n, start, medium, pur,numA,numB,numC);
 	return 0;
 }

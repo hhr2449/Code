@@ -1,4 +1,6 @@
 #include"fun.h"
+#include<iostream>
+using namespace std;
 void move(char start, char pur, int& numa, int& numb, int& numc)
 {
 	cout << start << ">>" << pur << endl;

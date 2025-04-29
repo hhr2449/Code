@@ -34,8 +34,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/code/cpp/test/test02",
-      "program": "d:/code/cpp/test/test02/build/Debug/outDebug",
+      "cwd": "d:/code/algorithm/graph theory/Homework/HW2/technologyIteration",
+      "program": "d:/code/algorithm/graph theory/Homework/HW2/technologyIteration/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
