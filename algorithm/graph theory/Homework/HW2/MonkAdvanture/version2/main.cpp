@@ -138,6 +138,7 @@ int main() {
     }
     cout << ans << '\n';
     for(int i = 1; i <= n; i++) {
+       
         cout << minRoad.node[i] << ' ';
     }
 }
