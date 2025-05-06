@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
-const int MAXN = 16;
+const int MAXN = 20;
 const int INF = 1000000;
 using namespace std;
 int costH[MAXN][MAXN];//回合数消耗
@@ -38,12 +38,12 @@ int getLb(const Road& r) {//求解当前道路衍生出来的H道路的长度下
     for(int i = 1;i<=n;i++) {
         if(!r.visited[i]) {
             min1 = INF, min2 = INF;
-            for(int j = 0;j<=n;j++){
+            for(int j = 1;j<=n;j++){
                 if(j != i && costH[j][i] < min1) {
                     min1 = costH[j][i];
                 }
             }
-            for(int j = 0;j<=n;j++){
+            for(int j = 1;j<=n;j++){
                 if(j != i && costH[i][j] < min2) {
                     min2 = costH[i][j];
                 }
