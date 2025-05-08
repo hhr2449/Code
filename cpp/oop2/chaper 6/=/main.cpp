@@ -27,6 +27,8 @@ class Person{
         }
         return *this;
     }
+    //函数的返回值类型是Person&，即(a=b)是一个Person类型的引用
+    //比如a=b=c,实际上是先调用b=c,(b = c)的返回值是Person类型的引用，应用的就是b，然后再去和a进行函数调用，即a.operator=((b=c))
     
 };
 void test01(){
