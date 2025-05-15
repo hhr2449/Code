@@ -15,6 +15,13 @@ marp: false
 ---
 # page2
 ## 1. 标题
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    cout << "Hello World!" << endl;
+}
+```
 ## 2. 标题
 
 

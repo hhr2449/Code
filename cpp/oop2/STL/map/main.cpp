@@ -17,5 +17,9 @@ int main() {
     //使用find查询键为key的元素，返回迭代器
     map<string, int>::iterator it = s.find("Monday");
     cout << (*it).first << (*it).second << '\n';
+    //使用count函数来统计键为key的元素数量（0/1）
     cout << s.count("Monday") << '\n';
+    //如果键为key的元素已经存在，则不会建立新的键值对，还是保持原样不变
+    s.insert(make_pair("Monday", 100));
+    cout << s["Monday"] << '\n';
 }
