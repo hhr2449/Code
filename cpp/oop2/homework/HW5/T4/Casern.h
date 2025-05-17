@@ -7,7 +7,16 @@
 
 class Casern {
     //TODO
+    std::vector<Commander*> commander;
+    std::vector<Footman*> footman;
+    std::vector<Belong*> belong;
 public:
     virtual std::string getKind() = 0;
+    virtual void addCommander(Commander* _commander) = 0;
+    virtual void addFootman(Footman* _footman) = 0;
+    virtual void addBelong(Belong* _belong) = 0;
+    virtual Footman* getFootmanbyIndex(int index) = 0;
+    virtual Commander* getCommanderbyIndex(int index) = 0;
+    virtual Belong* getBelongbyIndex(int index) = 0;
 	//TODO
 };

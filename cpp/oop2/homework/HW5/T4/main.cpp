@@ -55,11 +55,12 @@ void test2(Casern* casern) {
 
 int main() {
     Game* game = new Game();
-    HumanFactory hum;
-    OrcFactory orc;
+    HumanFactory hum;//人类工厂
+    OrcFactory orc;//兽人工厂
 
-    Casern* casern1 = game->createGame(hum);
-    Casern* casern2 = game->createGame(orc);
+    //存在多态，createGame()传入的参数以抽象兵营基类的引用存在，实现根据传入对象的类型创建不同的兵营并且返回
+    Casern* casern1 = game->createGame(hum);//创建人类兵营
+    Casern* casern2 = game->createGame(orc);//创建兽人兵营
 
     // for Test
     test1(casern1);
