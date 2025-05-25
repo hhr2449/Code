@@ -10,6 +10,7 @@
                 "*.cpp",//*.cpp代表当前目录下的所有cpp文件
                 "-o",
                 "${fileDirname}\\a.exe"//输出exe文件名为a.exe
+
             ],
             "options": {
                 "cwd": "${fileDirname}"

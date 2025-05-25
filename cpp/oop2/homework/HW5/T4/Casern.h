@@ -9,7 +9,7 @@ class Casern {
     //TODO
     std::vector<Commander*> commander;
     std::vector<Footman*> footman;
-    std::vector<Belong*> belong;
+    std::vector<Belong*> belong;//!基类中声明私有数据成员是不好的，不可以访问
 public:
     virtual std::string getKind() = 0;
     virtual void addCommander(Commander* _commander) = 0;
