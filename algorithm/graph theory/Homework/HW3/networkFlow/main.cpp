@@ -14,19 +14,21 @@ i的出口和入口连接一条单向边，边容量为点的容量
 总共节点数为 2*n，注意包括源和汇。
 */
 ll n, m, cap[90][90], flow[90][90], n_, s, t, parent[90], ans = 0;
+//使用bfs寻找增流道路
+//!注意，不要使用上课时的两种增流道路的做法来思考，这样还要处理边的方向，非常麻烦，应该在后面增流时引入反向边来解决，bfs时只要寻找正常方向的增流道路
 bool bfs() {
-    int vis[90];
+    int vis[90];//记录点是否访问
     memset(vis, 0, sizeof(vis));
-    queue<ll> q;
+    queue<ll> q;//队列
     q.push(s);
     while(!q.empty()) {
         ll u = q.front();
         q.pop();
         for(int i = 0; i < n_; i++) {
-            if(cap[u][i] - flow[u][i] > 0 && vis[i] == 0) {
+            if(cap[u][i] - flow[u][i] > 0 && vis[i] == 0) {//边的流量还没有满
                 q.push(i);
                 vis[i] = 1;
-                parent[i] = u;
+                parent[i] = u;//记录路径上节点的父节点，这样可以从汇点回溯获取道路
                 if(i == t) {                   
                     return true;
                 }
@@ -36,12 +38,14 @@ bool bfs() {
     return false;
 }
 void edmondsKarp() {
-    while(bfs()) {
+    while(bfs()) {//不停地寻找增流道路，没有增流道路时结束
         ll addFlow = INT_MAX;
         for(int i = t; i != s; i = parent[i]) {
             addFlow = min(addFlow, cap[parent[i]][i] - flow[parent[i]][i]);
         }
         ans += addFlow;
+        //!关键:在对正向边进行增流时要将方向边的容量增大相同的量，这样做的目的是给与“反悔的机会”
+        //!如果之后走了反向边，那就相当于对原先的正向边进行减流
         for(int i = t; i != s; i = parent[i]) {
             flow[parent[i]][i] += addFlow;
             cap[i][parent[i]] += addFlow;
