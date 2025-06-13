@@ -26,8 +26,10 @@ void test() {
     shared_ptr<Child> c(new Child());
     p->setChild(c);
     c->setParent(p);
+    //两个对象中的share_ptr互相指向，导致两个对象都不会析构
 }
 int main() {
     test();
     cout << "------------" << '\n';
+    //!没有发生析构
 }

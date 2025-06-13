@@ -1,22 +1,33 @@
-#include <iostream>
-using namespace std;
-void increase(int &x) {
-    x++;
-}
-void decrease(int &x) {
-    x--;
-}
-int main() {
-    void (*ptr)(int &);
-    int flag;
-    cin >> flag;
-    switch(flag) {
-        case 1: ptr = increase;
-            break;
-        case 2: ptr = decrease;
-            break;
-    }
-    int x = 10;
-    ptr(x);
-    cout << x << '\n';
-}
+ #include <iostream>
+ using namespace std;
+
+ class Base {
+ public:
+     virtual void print() {
+         cout << "Base class" << endl;
+     }
+ };
+
+ class Derived : public Base {
+ public:
+     void print() override {
+         cout << "Derived class" << endl;
+     }
+ };
+
+ int main() {
+     Base* base = new Base();
+     Derived* derived = new Derived();
+
+     Base* bp = dynamic_cast<Base*>(derived);
+     //将derived转换为Base*类型，即向上类型转换
+     Derived* dp = static_cast<Derived*>(base);
+    //将base转换为Derived*类型，即向下类型转换
+     bp->print();
+     dp->print();
+
+     delete base;
+     delete derived;
+
+     return 0;
+ }
