@@ -1,16 +1,19 @@
-#include<iostream>
-using namespace std;    
-#define ll long long
-int main()
-{
-    ll n;
-    cin >> n;
-    double ans = 0;
-    double len = 1.0/n;
-    double x = 0;
-    for(ll i = 0; i < n; i++) {
-        ans += len*x*x*x;
-        x += len;
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    string fileName = "test.xml";
+    ifstream ifs(fileName);
+    if(!ifs) {
+        //如果没有打开文件，则抛出异常并且输出错误信息
+        ostringstream info;
+        info << "file not found!" << "fileName:" << fileName << '\n'; 
+        throw runtime_error(info.str());
     }
-    cout << ans << endl;
+    ostringstream buf;
+    char ch;
+    while(ifs.get(ch)) {
+        buf << ch;
+    }
+    string Pstr = buf.str();
+    cout << Pstr;
 }

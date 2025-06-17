@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <man>
+        <name>仁义</name>
+        <age>18</age>
+        <!--单独创建一个标签来表示年龄-->
+    </man>
+    <woman>
+        <name age="18">瑶海</name>
+        <!--这里将年龄属性作为name标签的属性-->
+    </woman>
+</root>

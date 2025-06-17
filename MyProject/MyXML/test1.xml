@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<students>
+	<student id="1" class="101">
+		<name>大明</name>
+		<age>14</age>
+		<gender>male</gender>
+	</student>
+	<student id="2" class="102">
+		<name>玲玲 </name>
+		<age>15</age>
+		<gender>female</gender>
+	</student>
+	<student id="3" class="103">
+		<name>汤姆</name>
+		<age>16</age>
+		<gender>male</gender>
+	</student>
+</students>           

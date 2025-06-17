@@ -36,7 +36,6 @@ int mood;
     void increase_mood(int value) {
         mood += value;
     }
-
     void zoo(EventInterface* e) {
         e->increase_mood(5);
     }
