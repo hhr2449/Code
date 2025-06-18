@@ -1,1 +1,0 @@
-inbox copyto 1 copyto 2 sub 0 copyto 3 jumpifzero 15 copyfrom 2 add 1 copyto 1 copyfrom 3 sub 0 copyto 3 jumpifzero 15 jump 7 copyfrom 1 outbox jump 1 
