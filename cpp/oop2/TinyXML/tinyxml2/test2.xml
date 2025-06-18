@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================
+     Enterprise Application Configuration File
+     Version: 3.2
+     Last Updated: 2023-11-20
+     ============================================== -->
+<config:application xmlns:config="http://company.com/xmlns/config"
+                    xmlns:sec="http://company.com/xmlns/security"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://company.com/xmlns/config config_v3.xsd">
+
+  <!-- ##############################
+       Core System Settings
+       ############################## -->
+  <system config:env="production" 
+          config:timezone="UTC" 
+          config:backup="true">
+    <database config:type="cluster" 
+              config:failover="enabled">
+      <primary host="db1.company.com" 
+               port="5432" 
+               user="admin" 
+               password-encrypted="AES-256:U2FsdGVkX1..."/>
+      <replica host="db2.company.com" 
+               port="5432" 
+               config:read-only="true"/>
+    </database>
+
+    <!-- Maximum idle time in milliseconds -->
+    <timeouts config:connection="30000" 
+              config:transaction="120000"/>
+  </system>
+
+  <!-- ##############################
+       Security Module
+       ############################## -->
+  <sec:security config:encryption-level="high">
+    <!-- 
+      Access Control List (ACL) Definition
+      Format: role=[permission1,permission2,...]
+    -->
+    <sec:acl>
+      <role name="admin" permissions="read,write,delete,execute"/>
+      <role name="user" permissions="read,execute" 
+            sec:restricted-ips="192.168.1.*"/>
+      <role name="auditor" permissions="read" 
+            sec:access-time="09:00-17:00"/>
+    </sec:acl>
+
+    <!-- Certificate-Based Authentication -->
+    <sec:certificates>
+      <certificate id="ssl-main" 
+                   type="X.509" 
+                   store="keystore.jks" 
+                   password-encrypted="AES-256:U2FsdGVkX1..."/>
+    </sec:certificates>
+  </sec:security>
+
+  <!-- ##############################
+       Business Logic Modules
+       ############################## -->
+  <modules>
+    <!-- Payment Processing Configuration -->
+    <payment-processor config:active="true" 
+                       config:default-currency="USD">
+      <providers>
+        <provider name="stripe" 
+                 api-version="2023-08-16" 
+                 config:retry-attempts="3">
+          <credentials key-public="pk_live_..." 
+                      key-secret-encrypted="AES-256:U2FsdGVkX1..."/>
+        </provider>
+        <provider name="paypal" 
+                 api-version="v2" 
+                 config:fallback="true"/>
+      </providers>
+    </payment-processor>
+
+    <!-- Analytics Service Endpoints -->
+    <analytics config:sampling-rate="0.85">
+      <endpoint url="https://analytics.company.com/v1" 
+                config:timeout="5000"/>
+      <custom-dimensions>
+        <dimension name="user_segment" 
+                  type="string" 
+                  config:required="false"/>
+      </custom-dimensions>
+    </analytics>
+  </modules>
+
+  <!-- ##############################
+       Legacy System Integration
+       ############################## -->
+  <legacy config:compatibility-mode="true" 
+          config:deprecation-warning="2024-12-31">
+    <!-- SOAP WebService Configuration -->
+    <soap-endpoint 
+        wsdl-url="http://legacy.company.com/ws?WSDL" 
+        config:timeout="15000">
+      <authentication type="WS-Security" 
+                      version="1.1"/>
+    </soap-endpoint>
+  </legacy>
+</config:application>
