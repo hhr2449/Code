@@ -1,31 +1,31 @@
 #include"fun.h"
 int judge_ans(int cnt_ans, int cnt_output, string output[], string ans[]) {
-    //ÅĞ¶ÏÊÇ·ñÍê³É
+    //åˆ¤æ–­æ˜¯å¦å®Œæˆ
     int flag = 1;
-    if (cnt_ans != cnt_output) {//ÏÈ±È½ÏÊä³öÊıÁ¿
+    if (cnt_ans != cnt_output) {//å…ˆæ¯”è¾ƒè¾“å‡ºæ•°é‡
         flag = 0;
-        cout << "©°--------------------------------------©´" << '\n';
-        cout << "|    ÎÒÃÇÏëÒª" << cnt_ans << "¸öÊä³ö£¬ÄãÈ´ËÍ½øÁË" << cnt_output << "¸ö    |" << '\n';//ÊıÁ¿²»Ò»ÑùÖ±½Ó±¨´í
-        cout << "©¸--------------------------------------©¼" << '\n';
+        cout << "â”Œ--------------------------------------â”" << '\n';
+        cout << "|    æˆ‘ä»¬æƒ³è¦" << cnt_ans << "ä¸ªè¾“å‡ºï¼Œä½ å´é€è¿›äº†" << cnt_output << "ä¸ª    |" << '\n';//æ•°é‡ä¸ä¸€æ ·ç›´æ¥æŠ¥é”™
+        cout << "â””--------------------------------------â”˜" << '\n';
     }
     if (flag == 1) {
-        for (int i = 0; i < cnt_ans; ++i) {//ÔÙÒ»¸ö¸ö±È½ÏÊä³öµÄÄÚÈİ
+        for (int i = 0; i < cnt_ans; ++i) {//å†ä¸€ä¸ªä¸ªæ¯”è¾ƒè¾“å‡ºçš„å†…å®¹
             if (output[i] != ans[i]) {
                 flag = 0;
-                cout << "©°--------------------------------------©È" << '\n';
-                cout << "|    µÚ" << i + 1 << "¸öÊä³öÓĞ´íÎó    " << '\n';
-                cout << "|    ÎÒÃÇÏëÒª" << ans[i] << "ÄãÈ´ËÍ½øÁË" << output[i] << "    " << '\n';
-                cout << "©¸--------------------------------------©È" << '\n';
+                cout << "â”Œ--------------------------------------â”¤" << '\n';
+                cout << "|    ç¬¬" << i + 1 << "ä¸ªè¾“å‡ºæœ‰é”™è¯¯    " << '\n';
+                cout << "|    æˆ‘ä»¬æƒ³è¦" << ans[i] << "ä½ å´é€è¿›äº†" << output[i] << "    " << '\n';
+                cout << "â””--------------------------------------â”¤" << '\n';
                 break;
             }
         }
     }
-    cout << '\n' << (flag ? "¡¾!SUCCESS!¡¿" : "¡¾FAIL...¡¿") << '\n';
+    cout << '\n' << (flag ? "ã€!SUCCESS!ã€‘" : "ã€FAIL...ã€‘") << '\n';
     return flag;
 }
 
 void change_state(int x) {
-    string change_state = "state";//¸Ä±ä¹Ø¿¨×´Ì¬
+    string change_state = "state";//æ”¹å˜å…³å¡çŠ¶æ€
     change_state += to_string(x);
     change_state += ".txt";
     ofstream fout_change;
@@ -41,38 +41,38 @@ void change_state(int x) {
 }
 
 void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], string ans[], instruction input[], string output[], int ins_can_use[], string str[], int level, int flag_file, int x) {
-    int ptr_inbox = 0, ptr_input = 0, ptr_output = 0, cnt_output = 0, is_onestep = 0;//ptr_inboxÊÇÊäÈë»ıÄ¾µÄÖ¸Õë,ptr_inputÊÇÖ¸ÁîÖ¸Õë,ptr_outputÊÇÊä³ö»ıÄ¾µÄÖ¸Õëptr,ptr_carpetÊÇµØÌºµÄÖ¸Õë,cnt_outputÊÇÊä³ö»ıÄ¾µÄÊıÁ¿
-    string hand = "null";//ÊÖÀïÃ»ÓĞ¶«Î÷¼ÇÎªnull
-    establish(str, m, inbox, max_carpet, carpet, hand);//´´½¨µØÍ¼
-    bot_creat(str, 29, hand);//´´½¨»úÆ÷ÈË
-    update_inbox(str, ptr_inbox, inbox);//¸üĞÂinboxÉÏµÄÄÚÈİ
-    print(str, ptr_input, m, input);//¿ªÍ·ÏÈÏÔÊ¾Ò»¸ö»­Ãæ£¬¸øÊäÈë¹ı³ÌÒ»¸ö±È½ÏºÃµÄÌåÑé
+    int ptr_inbox = 0, ptr_input = 0, ptr_output = 0, cnt_output = 0, is_onestep = 0;//ptr_inboxæ˜¯è¾“å…¥ç§¯æœ¨çš„æŒ‡é’ˆ,ptr_inputæ˜¯æŒ‡ä»¤æŒ‡é’ˆ,ptr_outputæ˜¯è¾“å‡ºç§¯æœ¨çš„æŒ‡é’ˆptr,ptr_carpetæ˜¯åœ°æ¯¯çš„æŒ‡é’ˆ,cnt_outputæ˜¯è¾“å‡ºç§¯æœ¨çš„æ•°é‡
+    string hand = "null";//æ‰‹é‡Œæ²¡æœ‰ä¸œè¥¿è®°ä¸ºnull
+    establish(str, m, inbox, max_carpet, carpet, hand);//åˆ›å»ºåœ°å›¾
+    bot_creat(str, 29, hand);//åˆ›å»ºæœºå™¨äºº
+    update_inbox(str, ptr_inbox, inbox);//æ›´æ–°inboxä¸Šçš„å†…å®¹
+    print(str, ptr_input, m, input);//å¼€å¤´å…ˆæ˜¾ç¤ºä¸€ä¸ªç”»é¢ï¼Œç»™è¾“å…¥è¿‡ç¨‹ä¸€ä¸ªæ¯”è¾ƒå¥½çš„ä½“éªŒ
 
     if (flag_file == 1) {
-        read_from_file(level, input, m, 1, x);//´Ó´æµµ¶ÁÈ¡
+        read_from_file(level, input, m, 1, x);//ä»å­˜æ¡£è¯»å–
         system("cls");
-        print(str, ptr_input, m, input);//ÕâÊÇÎªÁË´¦Àí´ÓÎÄ¼ş¶ÁÈëºóµÄ½çÃæÏÔÊ¾£¬·½±ãÍæ¼ÒĞŞ¸Äinput
+        print(str, ptr_input, m, input);//è¿™æ˜¯ä¸ºäº†å¤„ç†ä»æ–‡ä»¶è¯»å…¥åçš„ç•Œé¢æ˜¾ç¤ºï¼Œæ–¹ä¾¿ç©å®¶ä¿®æ”¹input
     }
     else if (flag_file == 2) {
-        read_from_file(level, input, m, 2, x);//´ÓÍæ¼Ò¸øµÄÎÄ¼ş¶ÁÈ¡
+        read_from_file(level, input, m, 2, x);//ä»ç©å®¶ç»™çš„æ–‡ä»¶è¯»å–
         system("cls");
-        print(str, ptr_input, m, input);//ÕâÊÇÎªÁË´¦Àí´ÓÎÄ¼ş¶ÁÈëºóµÄ½çÃæÏÔÊ¾£¬·½±ãÍæ¼ÒĞŞ¸Äinput
+        print(str, ptr_input, m, input);//è¿™æ˜¯ä¸ºäº†å¤„ç†ä»æ–‡ä»¶è¯»å…¥åçš„ç•Œé¢æ˜¾ç¤ºï¼Œæ–¹ä¾¿ç©å®¶ä¿®æ”¹input
     }
     else {
-        read_from_keyboard(input, m, str, ptr_input, level, x);//ÊÖ¶¯ÊäÈë
+        read_from_keyboard(input, m, str, ptr_input, level, x);//æ‰‹åŠ¨è¾“å…¥
     }
 
-    change_input(m, input, str, ptr_input, level, x);//¸øÍæ¼ÒĞŞ¸ÄÖ¸ÁîµÄ»ú»á
+    change_input(m, input, str, ptr_input, level, x);//ç»™ç©å®¶ä¿®æ”¹æŒ‡ä»¤çš„æœºä¼š
 
     while (true) {
-        if (is_onestep == 1 || is_onestep == 2) {//Èç¹û½øÈëÁËµ¥²½µ÷ÊÔ£¨is_onestepÎª1£©£¬¾Í»áÔÚÕâÀï¿¨×¡£¬ÕâÊ±ºòÍæ¼ÒµÄÊäÈë»á³ÉÎªÏÂÒ»´ÎÊÇµ¥²½»¹ÊÇÁ¬ĞøµÄÒÀ¾İ
-            cout << "©°-----------------------------------------©´" << '\n';
-            cout << "|         ÄãÒÑ¾­½øÈëµ¥²½µ÷ÊÔÄ£Ê½          |" << '\n'
-                << "©À-----------------------------------------©È" << '\n'
-                << "|        ÒÑµ÷Íê£¬»Øµ½Á¬ĞøÖ´ĞĞ --> 0       |" << '\n'
-                << "|        Ã»µ÷Íê£¬¼ÌĞøµ¥²½µ÷ÊÔ --> 1       |" << '\n'
-                << "|        ·¢ÏÖ´úÂë´íÎó£¬ÏëĞŞ¸Ä --> 2       |" << '\n'
-                << "©¹-----------------------------------------©½" << '\n';
+        if (is_onestep == 1 || is_onestep == 2) {//å¦‚æœè¿›å…¥äº†å•æ­¥è°ƒè¯•ï¼ˆis_onestepä¸º1ï¼‰ï¼Œå°±ä¼šåœ¨è¿™é‡Œå¡ä½ï¼Œè¿™æ—¶å€™ç©å®¶çš„è¾“å…¥ä¼šæˆä¸ºä¸‹ä¸€æ¬¡æ˜¯å•æ­¥è¿˜æ˜¯è¿ç»­çš„ä¾æ®
+            cout << "â”Œ-----------------------------------------â”" << '\n';
+            cout << "|         ä½ å·²ç»è¿›å…¥å•æ­¥è°ƒè¯•æ¨¡å¼          |" << '\n'
+                << "â”œ-----------------------------------------â”¤" << '\n'
+                << "|        å·²è°ƒå®Œï¼Œå›åˆ°è¿ç»­æ‰§è¡Œ --> 0       |" << '\n'
+                << "|        æ²¡è°ƒå®Œï¼Œç»§ç»­å•æ­¥è°ƒè¯• --> 1       |" << '\n'
+                << "|        å‘ç°ä»£ç é”™è¯¯ï¼Œæƒ³ä¿®æ”¹ --> 2       |" << '\n'
+                << "â”•-----------------------------------------â”™" << '\n';
             print(str, ptr_input, m, input);
             enter_safe(is_onestep, 0, 2);
             if (is_onestep == 2) {
@@ -80,97 +80,97 @@ void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], 
             }
         }
         if (input[ptr_input].ins == "inbox") {//inbox
-            if (inbox[ptr_inbox] == "null") break;//ÍË³öÌõ¼ş£ºinboxÊ±·¢ÏÖÃ»ÓĞ»ıÄ¾
-            move(str, 29, 12, hand, ptr_input, m, input);//ÒÆ¶¯µ½´«ËÍ´ø
-            hand = inbox[ptr_inbox++];//hand¸üĞÂ
-            update_inbox(str, ptr_inbox, inbox);//Ò»¸ö»ıÄ¾±»ÄÃ×ßÁË£¬ĞèÒª¸üĞÂinbox
-            move(str, 12, 29, hand, ptr_input, m, input);//ÒÆ¶¯»ØÈ¥
+            if (inbox[ptr_inbox] == "null") break;//é€€å‡ºæ¡ä»¶ï¼šinboxæ—¶å‘ç°æ²¡æœ‰ç§¯æœ¨
+            move(str, 29, 12, hand, ptr_input, m, input);//ç§»åŠ¨åˆ°ä¼ é€å¸¦
+            hand = inbox[ptr_inbox++];//handæ›´æ–°
+            update_inbox(str, ptr_inbox, inbox);//ä¸€ä¸ªç§¯æœ¨è¢«æ‹¿èµ°äº†ï¼Œéœ€è¦æ›´æ–°inbox
+            move(str, 12, 29, hand, ptr_input, m, input);//ç§»åŠ¨å›å»
 
         }
 
         else if (input[ptr_input].ins == "copyfrom" && ins_can_use[1] == 1) {//copyfrom
-            int idx = static_cast<int>(input[ptr_input].op_num);//ÅĞ¶ÏÊäÈë²Ù×÷ÊıÊÇ·ñ·ÇÕûÊı
+            int idx = static_cast<int>(input[ptr_input].op_num);//åˆ¤æ–­è¾“å…¥æ“ä½œæ•°æ˜¯å¦éæ•´æ•°
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx >= 0 && idx <= max_carpet)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        Ã»ÓĞÕâÆ¬µØÌº            |" << '\n';
-                cout << "©¸---------------------------------©¼";
+                cout << "|        æ²¡æœ‰è¿™ç‰‡åœ°æ¯¯            |" << '\n';
+                cout << "â””---------------------------------â”˜";
                 return;
             }
             else if (carpet[idx] == "") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         µØÌºÀïÃ»ÓĞ¶«Î÷         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         åœ°æ¯¯é‡Œæ²¡æœ‰ä¸œè¥¿         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
-                move(str, 29, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, hand, ptr_input, m, input);//ÒÆ¶¯µ½¶ÔÓ¦¸ñ×Ó
-                hand = carpet[idx];//handÄÃÉÏ¶ÔÓ¦µÄÖµ
-                move(str, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, 29, hand, ptr_input, m, input);//ÒÆ¶¯»ØÀ´
+                move(str, 29, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, hand, ptr_input, m, input);//ç§»åŠ¨åˆ°å¯¹åº”æ ¼å­
+                hand = carpet[idx];//handæ‹¿ä¸Šå¯¹åº”çš„å€¼
+                move(str, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, 29, hand, ptr_input, m, input);//ç§»åŠ¨å›æ¥
             }
         }
 
         else if (input[ptr_input].ins == "copyto" && ins_can_use[2] == 1) {//copyto
             int idx = static_cast<int>(input[ptr_input].op_num);
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx >= 0 && idx <= max_carpet)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        Ã»ÓĞÕâÆ¬µØÌº            |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        æ²¡æœ‰è¿™ç‰‡åœ°æ¯¯            |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (hand == "null") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         µØÌºÉÏÃ»ÓĞ¶«Î÷         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         åœ°æ¯¯ä¸Šæ²¡æœ‰ä¸œè¥¿         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
                 move(str, 29, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, hand, ptr_input, m, input);
                 carpet[idx] = hand;
-                update_carpet(idx, carpet, str, max_carpet);//copytoÒª°ÑÍ¼ÉÏµÄµØÌºÒ²¸üĞÂ
+                update_carpet(idx, carpet, str, max_carpet);//copytoè¦æŠŠå›¾ä¸Šçš„åœ°æ¯¯ä¹Ÿæ›´æ–°
                 move(str, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, 29, hand, ptr_input, m, input);
-            }//Ã»ÓĞ¸üĞÂµØÌº£¬ÒÆ¶¯¾àÀë²»¶Ô
+            }//æ²¡æœ‰æ›´æ–°åœ°æ¯¯ï¼Œç§»åŠ¨è·ç¦»ä¸å¯¹
 
         }
 
         else if (input[ptr_input].ins == "jump" && ins_can_use[3] == 1) {//jump
-            int idx = static_cast<int>(input[ptr_input].op_num);//Ç¿×ª³ÉÕûĞÍ£¬ÓÃÓÚÅĞ¶Ï²Ù×÷ÊıÊÇ·ñÊÇÕûÊı
+            int idx = static_cast<int>(input[ptr_input].op_num);//å¼ºè½¬æˆæ•´å‹ï¼Œç”¨äºåˆ¤æ–­æ“ä½œæ•°æ˜¯å¦æ˜¯æ•´æ•°
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (idx == ptr_input + 1) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|       ²»ÄÜÌø×ªµ½×Ô¼ºÉíÉÏ       |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|       ä¸èƒ½è·³è½¬åˆ°è‡ªå·±èº«ä¸Š       |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx > 0 && idx <= m)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         Ã»ÓĞÕâÌõÖ¸Áî£¡         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ²¡æœ‰è¿™æ¡æŒ‡ä»¤ï¼         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
@@ -185,35 +185,35 @@ void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], 
         else if (input[ptr_input].ins == "jumpifzero" && ins_can_use[4] == 1) {//jumpifzero
             int idx = static_cast<int>(input[ptr_input].op_num);
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (idx == ptr_input + 1) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|       ²»ÄÜÌø×ªµ½×Ô¼ºÉíÉÏ       |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|       ä¸èƒ½è·³è½¬åˆ°è‡ªå·±èº«ä¸Š       |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (hand == "null") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         ÊÖÀïÃ»ÓĞ¶«Î÷£¡         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ‰‹é‡Œæ²¡æœ‰ä¸œè¥¿ï¼         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx > 0 && idx <= m)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         Ã»ÓĞÕâÌõÖ¸Áî£¡         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ²¡æœ‰è¿™æ¡æŒ‡ä»¤ï¼         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
-                if (hand == "0") {//¶à¼ÓÒ»¸öÅĞ¶Ï
+                if (hand == "0") {//å¤šåŠ ä¸€ä¸ªåˆ¤æ–­
                     ptr_input = idx - 1;
                     Sleep(100);
                     system("cls");
@@ -226,43 +226,43 @@ void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], 
         else if (input[ptr_input].ins == "add" && ins_can_use[5] == 1) {//add
             int idx = static_cast<int>(input[ptr_input].op_num);
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx >= 0 && idx <= max_carpet)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        Ã»ÓĞÕâÆ¬µØÌº            |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        æ²¡æœ‰è¿™ç‰‡åœ°æ¯¯            |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (hand == "null") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         ÊÖÀïÃ»ÓĞ¶«Î÷£¡         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ‰‹é‡Œæ²¡æœ‰ä¸œè¥¿ï¼         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (carpet[idx] == "") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         µØÌºÉÏÃ»ÓĞ¶«Î÷         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         åœ°æ¯¯ä¸Šæ²¡æœ‰ä¸œè¥¿         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(is_number(carpet[idx]) && is_number(hand))) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|     ÊÖºÍµØÌºµÄÊı×ÖÎŞ·¨¶ÔÓ¦     |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|     æ‰‹å’Œåœ°æ¯¯çš„æ•°å­—æ— æ³•å¯¹åº”     |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
                 move(str, 29, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, hand, ptr_input, m, input);
-                hand = to_string(stoi(hand) + stoi(carpet[idx]));//×ª³ÉÊıÏà¼õÔÙ×ª³É×Ö·û´®
+                hand = to_string(stoi(hand) + stoi(carpet[idx]));//è½¬æˆæ•°ç›¸å‡å†è½¬æˆå­—ç¬¦ä¸²
                 move(str, 33 - 5 * (max_carpet + 1) / 2 + 5 * idx, 29, hand, ptr_input, m, input);
             }
         }
@@ -270,38 +270,38 @@ void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], 
         else if (input[ptr_input].ins == "sub" && ins_can_use[6] == 1) {//sub
             int idx = static_cast<int>(input[ptr_input].op_num);
             if (input[ptr_input].op_num - idx != 0) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        ÄãµÄ²Ù×÷Êı²»ºÏ·¨        |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        ä½ çš„æ“ä½œæ•°ä¸åˆæ³•        |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(idx >= 0 && idx <= max_carpet)) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|        Ã»ÓĞÕâÆ¬µØÌº            |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|        æ²¡æœ‰è¿™ç‰‡åœ°æ¯¯            |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (hand == "null") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         ÊÖÀïÃ»ÓĞ¶«Î÷£¡         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ‰‹é‡Œæ²¡æœ‰ä¸œè¥¿ï¼         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (carpet[idx] == "") {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|         µØÌºÉÏÃ»ÓĞ¶«Î÷         |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         åœ°æ¯¯ä¸Šæ²¡æœ‰ä¸œè¥¿         |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else if (!(is_number(carpet[idx]) && is_number(hand))) {
-                cout << "©°---------------------------------©´" << '\n';
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "    |" << '\n';
-                cout << "|     ÊÖ»òµØÌºÉÏ²»ÊÇÊı×Ö          |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|     æ‰‹æˆ–åœ°æ¯¯ä¸Šä¸æ˜¯æ•°å­—          |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             else {
@@ -312,42 +312,42 @@ void level(int m, int cnt_ans, int max_carpet, string inbox[], string carpet[], 
         }
 
         else if (input[ptr_input].ins == "outbox") {
-            if (hand == "null") {//ÊÖÀï±ØĞëÓĞ¶«Î÷
-                cout << "©°---------------------------------©´" << '\n';
+            if (hand == "null") {//æ‰‹é‡Œå¿…é¡»æœ‰ä¸œè¥¿
+                cout << "â”Œ---------------------------------â”" << '\n';
                 cout << "|    Error on instruction " << ptr_input + 1 << "       |" << '\n';
-                cout << "|         ÊÖÀïÃ»ÓĞ¶«Î÷£¡          |" << '\n';
-                cout << "©¸---------------------------------©¼" << '\n';
+                cout << "|         æ‰‹é‡Œæ²¡æœ‰ä¸œè¥¿ï¼          |" << '\n';
+                cout << "â””---------------------------------â”˜" << '\n';
                 return;
             }
             move(str, 29, 46, hand, ptr_input, m, input);
             output[ptr_output++] = hand;
-            hand = "null";//·ÅÍêÖ®ºóÊÖ±ä¿Õ
+            hand = "null";//æ”¾å®Œä¹‹åæ‰‹å˜ç©º
             update_outbox(ptr_output, output, str);
             move(str, 46, 29, hand, ptr_input, m, input);
             cnt_output++;
         }
 
         else {
-            cout << "©°---------------------------------©´" << '\n';
-            cout << "©Ø    Error on instruction " << ptr_input + 1 << "       ©Ø" << '\n';
-            cout << "         ÄãµÄÖ¸Áî" << input[ptr_input].ins << "²»ºÏ·¨    " << '\n';
-            cout << "©¸---------------------------------©¼" << '\n';
-            return;//ÆäËû²»ºÏ·¨Ö¸Áî±¨´í
+            cout << "â”Œ---------------------------------â”" << '\n';
+            cout << "â”´    Error on instruction " << ptr_input + 1 << "       â”´" << '\n';
+            cout << "         ä½ çš„æŒ‡ä»¤" << input[ptr_input].ins << "ä¸åˆæ³•    " << '\n';
+            cout << "â””---------------------------------â”˜" << '\n';
+            return;//å…¶ä»–ä¸åˆæ³•æŒ‡ä»¤æŠ¥é”™
         }
         ptr_input++;
         if (ptr_input == m) {
-            break;//ÍË³öÌõ¼ş£ºÖ¸ÁîÖ´ĞĞÍê
+            break;//é€€å‡ºæ¡ä»¶ï¼šæŒ‡ä»¤æ‰§è¡Œå®Œ
         }
-        if (_kbhit()) { // ¼ì²âÊÇ·ñÓĞ¼üÅÌÊäÈë//¿ÉÒÔÊµÏÖ²»Ó°ÏìÖ÷½ø³ÌµÄÇ°ÌáÏÂÊäÈë
-            char ch = _getch(); // »ñÈ¡¼üÅÌÊäÈëµÄ×Ö·û
+        if (_kbhit()) { // æ£€æµ‹æ˜¯å¦æœ‰é”®ç›˜è¾“å…¥//å¯ä»¥å®ç°ä¸å½±å“ä¸»è¿›ç¨‹çš„å‰æä¸‹è¾“å…¥
+            char ch = _getch(); // è·å–é”®ç›˜è¾“å…¥çš„å­—ç¬¦
             if (ch == 'w') {
-                cout << "©°----------------©´" << '\n';
-                cout << "|ÄãÍË³öÁËµ±Ç°ÓÎÏ·|" << '\n';
-                cout << "©¸----------------©¼" << '\n';
+                cout << "â”Œ----------------â”" << '\n';
+                cout << "|ä½ é€€å‡ºäº†å½“å‰æ¸¸æˆ|" << '\n';
+                cout << "â””----------------â”˜" << '\n';
                 return;
             }
             if (ch == 'n') {
-                is_onestep = 1;//ÓÃis_onestepÅĞ¶ÏÊÇ·ñ½øÈëµ¥²½µ÷ÊÔ£¬ÈôÎª1¾ÍÊÇÈôÎª0¾ÍÍË³öµ¥²½
+                is_onestep = 1;//ç”¨is_onestepåˆ¤æ–­æ˜¯å¦è¿›å…¥å•æ­¥è°ƒè¯•ï¼Œè‹¥ä¸º1å°±æ˜¯è‹¥ä¸º0å°±é€€å‡ºå•æ­¥
             }
         }
     }

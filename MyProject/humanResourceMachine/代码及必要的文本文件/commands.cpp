@@ -1,7 +1,7 @@
 #include"fun.h"
 void is_ins(string ins_set[], int ins_can_use[]) {
     for (int i = 0; i < 8; i++) {
-        if (ins_set[i] == "inbox") {//½«ins_setµÄÄÚÈİÒ»Ò»¶ÔÓ¦
+        if (ins_set[i] == "inbox") {//å°†ins_setçš„å†…å®¹ä¸€ä¸€å¯¹åº”
             ins_can_use[0] = 1;
         }
         else if (ins_set[i] == "copyfrom") {
@@ -30,9 +30,9 @@ void is_ins(string ins_set[], int ins_can_use[]) {
 }
 bool IncludeChinese(const std::string& str) {
     for (size_t i = 0; i < str.length(); ++i) {
-        // ¼ì²é×Ö·ûÊÇ·ñÎª¶à×Ö½Ú×Ö·ûµÄÆğÊ¼×Ö½Ú
+        // æ£€æŸ¥å­—ç¬¦æ˜¯å¦ä¸ºå¤šå­—èŠ‚å­—ç¬¦çš„èµ·å§‹å­—èŠ‚
         if ((static_cast<unsigned char>(str[i]) & 0xC0) == 0xC0) {
-            // ¼ì²éÊÇ·ñÊÇÓĞĞ§µÄ UTF-8 ±àÂë
+            // æ£€æŸ¥æ˜¯å¦æ˜¯æœ‰æ•ˆçš„ UTF-8 ç¼–ç 
             if ((i + 1 < str.length()) && ((static_cast<unsigned char>(str[i + 1]) & 0xC0) == 0x80)) {
                 return true;
             }
@@ -41,24 +41,24 @@ bool IncludeChinese(const std::string& str) {
     return false;
 }
 
-bool is_number(const string& s) {//ÓÃÀ´ÅĞ¶ÏÒ»¸ö×Ö·û´®ÊÇ·ñÊÇÊı×Ö
+bool is_number(const string& s) {//ç”¨æ¥åˆ¤æ–­ä¸€ä¸ªå­—ç¬¦ä¸²æ˜¯å¦æ˜¯æ•°å­—
     for (char const& ch : s) {
-        if (!isdigit(ch) && ch != '-') // Èç¹û×Ö·û²»ÊÇÊı×Ö£¬Ôò·µ»Øfalse//×¢Òâ'-'
+        if (!isdigit(ch) && ch != '-') // å¦‚æœå­—ç¬¦ä¸æ˜¯æ•°å­—ï¼Œåˆ™è¿”å›false//æ³¨æ„'-'
             return false;
     }
-    return true; // ËùÓĞ×Ö·û¶¼ÊÇÊı×Ö£¬·µ»Øtrue
+    return true; // æ‰€æœ‰å­—ç¬¦éƒ½æ˜¯æ•°å­—ï¼Œè¿”å›true
 }
 
 void enter_safe_norange(int& x) {
     while (1) {
         string x_temp;
-        cin >> x_temp;//´ò¸ö²¹¶¡,ÏÈÊäÈë½ø×Ö·û´®
-        if (IncludeChinese(x_temp)) {//´¦ÀíÊÇÖĞÎÄµÄÇé¿ö
-            cout << "´íÎó£¡ÄãµÄÊäÈëÊÇ·Ç·¨µÄ" << '\n';
+        cin >> x_temp;//æ‰“ä¸ªè¡¥ä¸,å…ˆè¾“å…¥è¿›å­—ç¬¦ä¸²
+        if (IncludeChinese(x_temp)) {//å¤„ç†æ˜¯ä¸­æ–‡çš„æƒ…å†µ
+            cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æ˜¯éæ³•çš„" << '\n';
             continue;
         }
-        if (!is_number(x_temp)) {//´¦ÀíÊÇ×ÖÄ¸»ò¸¡µãÊı»òÆäËûµ¥×Ö·ûµÄÇé¿ö
-            cout << "´íÎó£¡ÄãµÄÊäÈëÊÇ·Ç·¨µÄ" << '\n';
+        if (!is_number(x_temp)) {//å¤„ç†æ˜¯å­—æ¯æˆ–æµ®ç‚¹æ•°æˆ–å…¶ä»–å•å­—ç¬¦çš„æƒ…å†µ
+            cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æ˜¯éæ³•çš„" << '\n';
             continue;
         }
         x = stoi(x_temp);
@@ -69,39 +69,39 @@ void enter_safe_norange(int& x) {
 void enter_safe(int& x, int start, int end) {
     while (1) {
         string x_temp;
-        cin >> x_temp;//´ò¸ö²¹¶¡,ÏÈÊäÈë½ø×Ö·û´®
-        if (IncludeChinese(x_temp)) {//´¦ÀíÊÇÖĞÎÄµÄÇé¿ö
-            cout << "´íÎó£¡ÄãµÄÊäÈëÊÇ·Ç·¨µÄ" << '\n';
+        cin >> x_temp;//æ‰“ä¸ªè¡¥ä¸,å…ˆè¾“å…¥è¿›å­—ç¬¦ä¸²
+        if (IncludeChinese(x_temp)) {//å¤„ç†æ˜¯ä¸­æ–‡çš„æƒ…å†µ
+            cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æ˜¯éæ³•çš„" << '\n';
             continue;
         }
-        if (!is_number(x_temp)) {//´¦ÀíÊÇ×ÖÄ¸»ò¸¡µãÊı»òÆäËûµ¥×Ö·ûµÄÇé¿ö
-            cout << "´íÎó£¡ÄãµÄÊäÈëÊÇ·Ç·¨µÄ" << '\n';
+        if (!is_number(x_temp)) {//å¤„ç†æ˜¯å­—æ¯æˆ–æµ®ç‚¹æ•°æˆ–å…¶ä»–å•å­—ç¬¦çš„æƒ…å†µ
+            cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æ˜¯éæ³•çš„" << '\n';
             continue;
         }
         x = stoi(x_temp);
         int feifa = 1;
-        for (int i = start; i <= end; i++) {//ÑéÖ¤ÊÇ·ñÊÇ·Ç·¨ÊäÈë
+        for (int i = start; i <= end; i++) {//éªŒè¯æ˜¯å¦æ˜¯éæ³•è¾“å…¥
             if (x == i) {
                 feifa = 0;
             }
         }
         if (feifa == 1) {
-            cout << "´íÎó£¡Ã»ÓĞÕâ¸öÑ¡Ïî" << '\n';
+            cout << "é”™è¯¯ï¼æ²¡æœ‰è¿™ä¸ªé€‰é¡¹" << '\n';
             continue;
         }
         break;
     }
 }
 
-void read_from_keyboard(instruction input[], int m, string str[], int ptr_input, int level, int x) {//ÊäÈëÖ¸Áî
+void read_from_keyboard(instruction input[], int m, string str[], int ptr_input, int level, int x) {//è¾“å…¥æŒ‡ä»¤
     int i = 0;
     string temp_open_file = "memory";
     temp_open_file += to_string(x);
-    temp_open_file += ".txt";//ÎªÁËµÃµ½¶ÔÓ¦¹Ø¿¨´æµµÎÄ¼şÃû
+    temp_open_file += ".txt";//ä¸ºäº†å¾—åˆ°å¯¹åº”å…³å¡å­˜æ¡£æ–‡ä»¶å
     ofstream fout(temp_open_file);
     if (!fout.is_open()) {
-        cout << "´íÎó£¡ÎÄ¼ş´ò¿ªÊ§°Ü" << '\n';
-        // ´¦ÀíÎÄ¼ş´ò¿ªÊ§°ÜµÄÇé¿ö
+        cout << "é”™è¯¯ï¼æ–‡ä»¶æ‰“å¼€å¤±è´¥" << '\n';
+        // å¤„ç†æ–‡ä»¶æ‰“å¼€å¤±è´¥çš„æƒ…å†µ
         return;
     }
     while (i < m) {
@@ -110,155 +110,155 @@ void read_from_keyboard(instruction input[], int m, string str[], int ptr_input,
         {
             string temp_op_num;
             cin >> temp_op_num;
-            if (IncludeChinese(temp_op_num)) {//´¦ÀíÊÇÖĞÎÄµÄÇé¿ö
-                cout << "´íÎó£¡ÄãµÄÊäÈëÖ¸Áî·Ç·¨" << '\n';
+            if (IncludeChinese(temp_op_num)) {//å¤„ç†æ˜¯ä¸­æ–‡çš„æƒ…å†µ
+                cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æŒ‡ä»¤éæ³•" << '\n';
                 continue;
             }
-            if (!is_number(temp_op_num)) {//´¦ÀíÊÇ×ÖÄ¸»ò¸¡µãÊı»òÆäËûµ¥×Ö·ûµÄÇé¿ö
-                cout << "´íÎó£¡ÄãµÄÊäÈëÖ¸Áî·Ç·¨" << '\n';
+            if (!is_number(temp_op_num)) {//å¤„ç†æ˜¯å­—æ¯æˆ–æµ®ç‚¹æ•°æˆ–å…¶ä»–å•å­—ç¬¦çš„æƒ…å†µ
+                cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æŒ‡ä»¤éæ³•" << '\n';
                 continue;
             }
-            input[i].op_num = stoi(temp_op_num);//ÓĞ²Ù×÷ÊıµÄÖ¸ÁîÒªÊäÈë²Ù×÷Êı
-            fout << input[i].ins << ' ' << input[i].op_num << ' ';//ÔÚÊäÈëµÄ¹ı³ÌÖĞË³±ã´æµµ
+            input[i].op_num = stoi(temp_op_num);//æœ‰æ“ä½œæ•°çš„æŒ‡ä»¤è¦è¾“å…¥æ“ä½œæ•°
+            fout << input[i].ins << ' ' << input[i].op_num << ' ';//åœ¨è¾“å…¥çš„è¿‡ç¨‹ä¸­é¡ºä¾¿å­˜æ¡£
             i++;
         }
         else if (input[i].ins == "inbox" || input[i].ins == "outbox") {
-            fout << input[i].ins << ' ';//ÔÚÊäÈëµÄ¹ı³ÌÖĞË³±ã´æµµ
+            fout << input[i].ins << ' ';//åœ¨è¾“å…¥çš„è¿‡ç¨‹ä¸­é¡ºä¾¿å­˜æ¡£
             i++;
         }
         else {
-            cout << "´íÎó£¡ÄãµÄÊäÈëÖ¸Áî·Ç·¨" << '\n';
-            continue;//µ±ÇÒ½öµ±ÊäÈëµÄÖ¸ÁîºÍ²Ù×÷ÊıÍ¬Ê±ÕıÈ·ÊÇ²Å»á½øÈëÏÂÒ»ÌõÖ¸ÁîÊäÈë£¬·ñÔò¾ÍÒªÖØĞÂÊäÈë
+            cout << "é”™è¯¯ï¼ä½ çš„è¾“å…¥æŒ‡ä»¤éæ³•" << '\n';
+            continue;//å½“ä¸”ä»…å½“è¾“å…¥çš„æŒ‡ä»¤å’Œæ“ä½œæ•°åŒæ—¶æ­£ç¡®æ˜¯æ‰ä¼šè¿›å…¥ä¸‹ä¸€æ¡æŒ‡ä»¤è¾“å…¥ï¼Œå¦åˆ™å°±è¦é‡æ–°è¾“å…¥
         }
         system("cls");
-        print(str, ptr_input, m, input);//¿ÉÒÔÊµÊ±¿´µ½ÊäÈëµÄÖ¸Áî
+        print(str, ptr_input, m, input);//å¯ä»¥å®æ—¶çœ‹åˆ°è¾“å…¥çš„æŒ‡ä»¤
     }
     fout.close();
 }
 
-void read_from_file(int level, instruction input[], int& m, int is_my_file, int x) {//is_my_fileÊÇÓÃÓÚÅĞ¶ÏÊÇ×Ô¼ºµÄÎÄ¼ş£¨2£©»¹ÊÇ¶Áµµ£¨1£©
+void read_from_file(int level, instruction input[], int& m, int is_my_file, int x) {//is_my_fileæ˜¯ç”¨äºåˆ¤æ–­æ˜¯è‡ªå·±çš„æ–‡ä»¶ï¼ˆ2ï¼‰è¿˜æ˜¯è¯»æ¡£ï¼ˆ1ï¼‰
     ifstream fin;
     while (1) {
-        if (is_my_file == 2) {//×Ô¼ºÊäÈëÎÄ¼ş
+        if (is_my_file == 2) {//è‡ªå·±è¾“å…¥æ–‡ä»¶
             cout << "" << '\n';
-            cout << "©°------------------©´" << '\n';
-            cout << "|ÇëÊäÈëÄãµÄÎÄ¼şÂ·¾¶|" << '\n';
-            cout << "©¸------------------©¼" << '\n';
+            cout << "â”Œ------------------â”" << '\n';
+            cout << "|è¯·è¾“å…¥ä½ çš„æ–‡ä»¶è·¯å¾„|" << '\n';
+            cout << "â””------------------â”˜" << '\n';
             string file_path;
             cin >> file_path;
             ifstream test(file_path);
             fin.open(file_path);
         }
-        else {//¶Áµµ
+        else {//è¯»æ¡£
             string temp_open_file = "memory";
             temp_open_file += to_string(x);
             temp_open_file += ".txt";
-            fin.open(temp_open_file);//ÎªÁËµÃµ½¶ÔÓ¦¹Ø¿¨´æµµÎÄ¼şÃû
+            fin.open(temp_open_file);//ä¸ºäº†å¾—åˆ°å¯¹åº”å…³å¡å­˜æ¡£æ–‡ä»¶å
         }
 
         if (!fin) {
-            // ´¦ÀíÎÄ¼ş´ò¿ªÊ§°ÜµÄÇé¿ö
-            cout << "´íÎó£¡ÎÄ¼ş´ò¿ªÊ§°Ü" << '\n';
+            // å¤„ç†æ–‡ä»¶æ‰“å¼€å¤±è´¥çš„æƒ…å†µ
+            cout << "é”™è¯¯ï¼æ–‡ä»¶æ‰“å¼€å¤±è´¥" << '\n';
             continue;
         }
         break;
     }
-    for (int i = 0; !fin.eof(); i++) {//±éÀú¶ÁÈëÖ¸Áî
+    for (int i = 0; !fin.eof(); i++) {//éå†è¯»å…¥æŒ‡ä»¤
         fin >> input[i].ins;
         if (input[i].ins == "add" || input[i].ins == "sub" || input[i].ins == "copyto" || input[i].ins == "copyfrom" || input[i].ins == "jump" || input[i].ins == "jumpifzero")
         {
             fin >> input[i].op_num;
         }
-        m = i;//ÕâÀïµÄmÒıÓÃ´«Èë£¬µÃµ½Ö¸ÁîµÄ×Ü¸öÊı
+        m = i;//è¿™é‡Œçš„må¼•ç”¨ä¼ å…¥ï¼Œå¾—åˆ°æŒ‡ä»¤çš„æ€»ä¸ªæ•°
     }
 }
 
-void change_input(int& m, instruction input[], string str[], int ptr_input, int level, int x) {//ĞŞ¸ÄÖ¸ÁîµÄº¯Êı
+void change_input(int& m, instruction input[], string str[], int ptr_input, int level, int x) {//ä¿®æ”¹æŒ‡ä»¤çš„å‡½æ•°
     int is_change = 0, change_ins = 0, num_ins = 0, temp_op_num = -1, is_write = 0;
     string temp_ins;
-    cout << "©°-----©ÈÖ¸ÁîÈ·ÈÏ©À------------©´" << '\n';
-    cout << "|    ÊÇ·ñÈ·ÈÏÖ¸Áî           |" << '\n';
-    cout << "©À---------------------------©È" << '\n'
-        << "|¾ÍÕâÑù -> 0 | ÎÒÒªĞŞ¸Ä -> 1|" << '\n'
-        << "©¸---------------------------©¼" << '\n';
+    cout << "â”Œ-----â”¤æŒ‡ä»¤ç¡®è®¤â”œ------------â”" << '\n';
+    cout << "|    æ˜¯å¦ç¡®è®¤æŒ‡ä»¤           |" << '\n';
+    cout << "â”œ---------------------------â”¤" << '\n'
+        << "|å°±è¿™æ · -> 0 | æˆ‘è¦ä¿®æ”¹ -> 1|" << '\n'
+        << "â””---------------------------â”˜" << '\n';
     enter_safe(is_change, 0, 1);
     if (is_change == 1) {
         while (1) {
             system("cls");
             print(str, ptr_input, m, input);
-            cout << "©°-----©ÈÖ¸Áî¸ü¸Ä©À-------©´" << '\n';
-            cout << "|    Çë½øĞĞÏàÓ¦¸ü¸Ä    |" << '\n';
-            cout << "©À----------------------©È" << '\n'
-                << "|   ÎÒÒªÉ¾³ıÖ¸Áî -> 1  |" << '\n'
-                << "|   ÎÒÒªÌí¼ÓÖ¸Áî -> 2  |" << '\n'
-                << "|   ¾ÍÕâÑù£¡ -> 3      |" << '\n'
-                << "©¸----------------------©¼" << '\n';
+            cout << "â”Œ-----â”¤æŒ‡ä»¤æ›´æ”¹â”œ-------â”" << '\n';
+            cout << "|    è¯·è¿›è¡Œç›¸åº”æ›´æ”¹    |" << '\n';
+            cout << "â”œ----------------------â”¤" << '\n'
+                << "|   æˆ‘è¦åˆ é™¤æŒ‡ä»¤ -> 1  |" << '\n'
+                << "|   æˆ‘è¦æ·»åŠ æŒ‡ä»¤ -> 2  |" << '\n'
+                << "|   å°±è¿™æ ·ï¼ -> 3      |" << '\n'
+                << "â””----------------------â”˜" << '\n';
             enter_safe(change_ins, 1, 3);
             switch (change_ins) {
-            case 1: {//É¾³ıÖ¸Áî
-                cout << "-----©ÈÖ¸ÁîÉ¾³ı©À-----" << '\n';
-                cout << "ÊäÈëÒªÉ¾³ıµÄÖ¸ÁîºÅÊı" << '\n';
+            case 1: {//åˆ é™¤æŒ‡ä»¤
+                cout << "-----â”¤æŒ‡ä»¤åˆ é™¤â”œ-----" << '\n';
+                cout << "è¾“å…¥è¦åˆ é™¤çš„æŒ‡ä»¤å·æ•°" << '\n';
                 cout << "----------------------" << '\n';
                 enter_safe_norange(num_ins);
                 if (num_ins > m) {
                     num_ins = m;
                 }
-                for (int i = num_ins; i < m; i++) {//Ö±½Ó½«input´Ó¸Ä±äµÄÄÇÒ»ÌõÖ¸Áî¿ªÊ¼ÏòÇ°ÍÆÒ»¸ñ
+                for (int i = num_ins; i < m; i++) {//ç›´æ¥å°†inputä»æ”¹å˜çš„é‚£ä¸€æ¡æŒ‡ä»¤å¼€å§‹å‘å‰æ¨ä¸€æ ¼
                     input[i - 1] = input[i];
                 }
-                m--;//´ËÊ±m±»Éè¶¨ÎªÒıÓÃ´«Èë£¬Ã¿É¾³ıÒ»Ìõ¼õ1
+                m--;//æ­¤æ—¶mè¢«è®¾å®šä¸ºå¼•ç”¨ä¼ å…¥ï¼Œæ¯åˆ é™¤ä¸€æ¡å‡1
                 system("cls");
-                print(str, ptr_input, m, input);//¸üĞÂ½çÃæ
+                print(str, ptr_input, m, input);//æ›´æ–°ç•Œé¢
                 break;
             }
-            case 2: {//Ìí¼ÓÖ¸Áî
-                cout << "-----©ÈÖ¸ÁîÌí¼Ó©À-----" << '\n';
-                cout << "Àı£ºÖ¸ÁîºÅÊıÎª2" << '\n' << "ÔòÌí¼ÓÖ¸ÁîÎªĞÂÖ¸ÁîµÄµÚ2Ìõ" << '\n';
-                cout << "ÇëÊäÈëÒªÌí¼ÓµÄÖ¸ÁîºÅÊı" << '\n';
+            case 2: {//æ·»åŠ æŒ‡ä»¤
+                cout << "-----â”¤æŒ‡ä»¤æ·»åŠ â”œ-----" << '\n';
+                cout << "ä¾‹ï¼šæŒ‡ä»¤å·æ•°ä¸º2" << '\n' << "åˆ™æ·»åŠ æŒ‡ä»¤ä¸ºæ–°æŒ‡ä»¤çš„ç¬¬2æ¡" << '\n';
+                cout << "è¯·è¾“å…¥è¦æ·»åŠ çš„æŒ‡ä»¤å·æ•°" << '\n';
                 cout << "----------------------" << '\n';
                 enter_safe_norange(num_ins);
                 if (num_ins > m) {
                     num_ins = m + 1;
                 }
                 for (int i = m; i > num_ins - 1; i--) {
-                    input[i] = input[i - 1];//´Ó¼ÓÈëµÄÎ»ÖÃ¿ªÊ¼È«²¿ÏòºóÍÆÒ»¸ñ£¬ÌÚ³öÒ»¸ö¿Õ¼ä
+                    input[i] = input[i - 1];//ä»åŠ å…¥çš„ä½ç½®å¼€å§‹å…¨éƒ¨å‘åæ¨ä¸€æ ¼ï¼Œè…¾å‡ºä¸€ä¸ªç©ºé—´
                 }
                 cout << "----------------------" << '\n';
-                cout << "ÇëÊäÈëÒªÌí¼ÓµÄÖ¸ÁîÄÚÈİ" << '\n';
+                cout << "è¯·è¾“å…¥è¦æ·»åŠ çš„æŒ‡ä»¤å†…å®¹" << '\n';
                 cout << "----------------------" << '\n';
-                cin >> temp_ins;//½«Ö¸ÁîÌîÈë¿Õ³öµÄ¿Õ¼ä
+                cin >> temp_ins;//å°†æŒ‡ä»¤å¡«å…¥ç©ºå‡ºçš„ç©ºé—´
                 input[num_ins - 1].ins = temp_ins;
                 if (temp_ins == "add" || temp_ins == "sub" || temp_ins == "copyto" || temp_ins == "copyfrom" || temp_ins == "jump" || temp_ins == "jumpifzero") {
                     enter_safe_norange(temp_op_num);
-                    input[num_ins - 1].op_num = temp_op_num;//ÒªÌîÈë²Ù×÷Êı
+                    input[num_ins - 1].op_num = temp_op_num;//è¦å¡«å…¥æ“ä½œæ•°
                 }
                 else {
-                    input[num_ins - 1].op_num = -1;//²»ĞèÒª²Ù×÷ÊıµÄÖ¸ÁîÁîÎª-1
+                    input[num_ins - 1].op_num = -1;//ä¸éœ€è¦æ“ä½œæ•°çš„æŒ‡ä»¤ä»¤ä¸º-1
                 }
-                m++;//Ö¸ÁîÊı¼Ó1
+                m++;//æŒ‡ä»¤æ•°åŠ 1
                 system("cls");
-                print(str, ptr_input, m, input);//¸üĞÂ½çÃæ
+                print(str, ptr_input, m, input);//æ›´æ–°ç•Œé¢
                 break;
             }
-            case 3: {//ÍË³ö
-                cout << "©°-----©È±£´æ¸ü¸Ä©À-------©´" << '\n';
-                cout << "|    ÊÇ·ñ±£´æ¸ü¸Ä£¿    |" << '\n';
-                cout << "©À----------------------©È" << '\n'
-                    << "|   ÎÒÒª±£´æ -> 1      |" << '\n'
-                    << "|   ²»ÓÃ±£´æ -> 0      |" << '\n'
-                    << "©¸----------------------©¼" << '\n';//Ñ¯ÎÊÊÇ·ñ±£´æ¸ü¸Äµ½´æµµ
+            case 3: {//é€€å‡º
+                cout << "â”Œ-----â”¤ä¿å­˜æ›´æ”¹â”œ-------â”" << '\n';
+                cout << "|    æ˜¯å¦ä¿å­˜æ›´æ”¹ï¼Ÿ    |" << '\n';
+                cout << "â”œ----------------------â”¤" << '\n'
+                    << "|   æˆ‘è¦ä¿å­˜ -> 1      |" << '\n'
+                    << "|   ä¸ç”¨ä¿å­˜ -> 0      |" << '\n'
+                    << "â””----------------------â”˜" << '\n';//è¯¢é—®æ˜¯å¦ä¿å­˜æ›´æ”¹åˆ°å­˜æ¡£
                 cin >> is_write;
                 if (is_write == 1) {
                     string temp_open_file = "memory";
                     temp_open_file += to_string(x);
                     temp_open_file += ".txt";
-                    ofstream fout(temp_open_file);//ÎªÁËµÃµ½¶ÔÓ¦¹Ø¿¨´æµµÎÄ¼şÃû
+                    ofstream fout(temp_open_file);//ä¸ºäº†å¾—åˆ°å¯¹åº”å…³å¡å­˜æ¡£æ–‡ä»¶å
                     if (!fout.is_open()) {
-                        // ´¦ÀíÎÄ¼ş´ò¿ªÊ§°ÜµÄÇé¿ö
-                        cout << "´íÎó£¡ÎÄ¼ş´ò¿ªÊ§°Ü" << '\n';
+                        // å¤„ç†æ–‡ä»¶æ‰“å¼€å¤±è´¥çš„æƒ…å†µ
+                        cout << "é”™è¯¯ï¼æ–‡ä»¶æ‰“å¼€å¤±è´¥" << '\n';
                         return;
                     }
-                    for (int i = 0; i < m; i++) {//±éÀú£¬½«Ö¸ÁîÊäÈë
+                    for (int i = 0; i < m; i++) {//éå†ï¼Œå°†æŒ‡ä»¤è¾“å…¥
                         fout << input[i].ins << ' ';
                         if (input[i].ins == "add" || input[i].ins == "sub" || input[i].ins == "copyto" || input[i].ins == "copyfrom" || input[i].ins == "jump" || input[i].ins == "jumpifzero")
                         {
@@ -269,7 +269,7 @@ void change_input(int& m, instruction input[], string str[], int ptr_input, int 
                 return;
             }
             default:
-                cout << "´íÎó£¡²»ºÏ·¨Ö¸Áî" << '\n';
+                cout << "é”™è¯¯ï¼ä¸åˆæ³•æŒ‡ä»¤" << '\n';
             }
         }
     }

@@ -67,9 +67,9 @@ void test3() {
     Parser parser;
     auto start = std::chrono::high_resolution_clock::now();
     for(int i = 0; i < 10000; i++) {
-        Xml root = parser.parseFromFile("test1.xml");
+        Xml root = parser.parseFromFile("test2.xml");
     }
-    Xml root = parser.parseFromFile("test1.xml");
+    Xml root = parser.parseFromFile("test2.xml");
     cout << root.output() << endl;
     cout << '\n';
     auto end = std::chrono::high_resolution_clock::now();

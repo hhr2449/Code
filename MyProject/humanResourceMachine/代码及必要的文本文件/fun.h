@@ -3,12 +3,12 @@
 #include<string>
 #include<windows.h>
 #include<fstream>
-#include <conio.h> // °üº¬kbhit()ºÍgetch()º¯ÊıµÄÍ·ÎÄ¼ş
+#include <conio.h> // åŒ…å«kbhit()å’Œgetch()å‡½æ•°çš„å¤´æ–‡ä»¶
 #include <sstream>
-#include <iomanip> // Ö÷²Ëµ¥ÕıÖĞÉú³É
-#include <cstdlib> //Çå¿ÕÆÁÄ»º¯Êı
+#include <iomanip> // ä¸»èœå•æ­£ä¸­ç”Ÿæˆ
+#include <cstdlib> //æ¸…ç©ºå±å¹•å‡½æ•°
 using namespace std;
-struct instruction {//Ö¸Áî½á¹¹Ìå£¬°üº¬Ö¸ÁîÃû³ÆºÍ²Ù×÷ÊıÁ½²¿·Ö
+struct instruction {//æŒ‡ä»¤ç»“æ„ä½“ï¼ŒåŒ…å«æŒ‡ä»¤åç§°å’Œæ“ä½œæ•°ä¸¤éƒ¨åˆ†
     string ins;
     double op_num = -1;
 };

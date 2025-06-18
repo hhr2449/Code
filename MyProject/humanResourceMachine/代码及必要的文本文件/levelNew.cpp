@@ -1,53 +1,53 @@
 #include"fun.h"
-void level_import(string level_import[], int cnt_level) {//½«¹Ø¿¨ĞÅÏ¢ºÍÔ´ÎÄ¼ş·ÖÀë£¬·½±ãÌí¼ÓºÍÎ¬»¤¹Ø¿¨
+void level_import(string level_import[], int cnt_level) {//å°†å…³å¡ä¿¡æ¯å’Œæºæ–‡ä»¶åˆ†ç¦»ï¼Œæ–¹ä¾¿æ·»åŠ å’Œç»´æŠ¤å…³å¡
     int a = 1;
     while (a == 1) {
-        cout << "ÏÖÔÚµ¼ÈëµÚ" << cnt_level << "¹Ø,ÇëÊäÈë¹Ø¿¨ÎÄ¼şÂ·¾¶£¨±àÂëÒªÇóÎªANSI£©......" << '\n';//ÌáÊ¾µ¼ÈëµÄ¹Ø¿¨Êı
+        cout << "ç°åœ¨å¯¼å…¥ç¬¬" << cnt_level << "å…³,è¯·è¾“å…¥å…³å¡æ–‡ä»¶è·¯å¾„ï¼ˆç¼–ç è¦æ±‚ä¸ºANSIï¼‰......" << '\n';//æç¤ºå¯¼å…¥çš„å…³å¡æ•°
         string temp_level;
         cin >> temp_level;
         string temp_memory = "memory";
         temp_memory += to_string(cnt_level);
-        temp_memory += ".txt";//È·ÈÏÒªµ¼Èë¹Ø¿¨µÄÍ¬Ê±´´½¨Ò»¸ömemoryxÎÄ¼şÓÃÓÚ´¢´æ¶ÔÓ¦¹Ø¿¨µÄ´æµµ
+        temp_memory += ".txt";//ç¡®è®¤è¦å¯¼å…¥å…³å¡çš„åŒæ—¶åˆ›å»ºä¸€ä¸ªmemoryxæ–‡ä»¶ç”¨äºå‚¨å­˜å¯¹åº”å…³å¡çš„å­˜æ¡£
         string temp_state = "state";
         temp_state += to_string(cnt_level);
         temp_state += ".txt";
         cnt_level++;
-        ifstream test(temp_level);//Òª¼ì²éÓ¦¸ÃÓÃifstream,ofstream»áÖØĞÂ´´½¨Ò»¸ö//¼ì²éÊÇ·ñÓĞ¶ÔÓ¦µÄ¹Ø¿¨ÎÄ¼ş
+        ifstream test(temp_level);//è¦æ£€æŸ¥åº”è¯¥ç”¨ifstream,ofstreamä¼šé‡æ–°åˆ›å»ºä¸€ä¸ª//æ£€æŸ¥æ˜¯å¦æœ‰å¯¹åº”çš„å…³å¡æ–‡ä»¶
         if (!test) {
-            cout << "´íÎó£ºÃ»ÓĞÕÒµ½¹Ø¿¨ÎÄ¼ş" << '\n';
+            cout << "é”™è¯¯ï¼šæ²¡æœ‰æ‰¾åˆ°å…³å¡æ–‡ä»¶" << '\n';
             return;
         }
         test.close();
-        ofstream fout("index.txt", ios::app);//ÕâÀïÊä³öÎÄ¼şµÄ·½Ê½ÊÇÔÚºóÌí¼Ó
+        ofstream fout("index.txt", ios::app);//è¿™é‡Œè¾“å‡ºæ–‡ä»¶çš„æ–¹å¼æ˜¯åœ¨åæ·»åŠ 
         if (!fout) {
-            cout << "´íÎó£ºÎŞ·¨´ò¿ª index ÎÄ¼ş" << '\n';
+            cout << "é”™è¯¯ï¼šæ— æ³•æ‰“å¼€ index æ–‡ä»¶" << '\n';
             return;
         }
-        fout << ' ' << temp_level;//¹Ø¿¨ĞÅÏ¢µ¼ÈëË÷Òı
+        fout << ' ' << temp_level;//å…³å¡ä¿¡æ¯å¯¼å…¥ç´¢å¼•
         fout.close();
-        cout << "µ¼Èë³É¹¦" << '\n';
+        cout << "å¯¼å…¥æˆåŠŸ" << '\n';
         fout.open(temp_memory);
         fout.close();
         fout.open(temp_state);
         fout << 0;
         fout.close();
-        cout << "©°--------------------©´" << '\n';
-        cout << "|¼ÌĞø -> 1||ÍË³ö -> 0|" << '\n';
-        cout << "©¹--------------------©½" << '\n';
+        cout << "â”Œ--------------------â”" << '\n';
+        cout << "|ç»§ç»­ -> 1||é€€å‡º -> 0|" << '\n';
+        cout << "â”•--------------------â”™" << '\n';
         enter_safe(a, 0, 1);
     }
 }
 void level_delect(string index[], int cnt_level) {
 
     int sn_delect;
-    cout << "¡¾ÇëÊäÈëÄãÒªÉ¾³ıµÄ¹Ø¿¨ĞòºÅ¡¿" << '\n';
+    cout << "ã€è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„å…³å¡åºå·ã€‘" << '\n';
     enter_safe_norange(sn_delect);
-    cout << "©°-------------©ÈÉÆÒâµÄÌáĞÑ©À----------------©´" << '\n';
-    cout << "|    ¹Ø¿¨Ò»µ©É¾³ıÎŞ·¨ÕÒ»Ø£¬ÇëÉ÷ÖØ¿¼ÂÇ     |" << '\n'
-        << "©À-----------------------------------------©È" << '\n'
-        << "|              ÎÒÈ·¶¨ --> 0               |" << '\n'
-        << "|              ËãÁË°É --> 1               |" << '\n'
-        << "©¹-----------------------------------------©½" << '\n';
+    cout << "â”Œ-------------â”¤å–„æ„çš„æé†’â”œ----------------â”" << '\n';
+    cout << "|    å…³å¡ä¸€æ—¦åˆ é™¤æ— æ³•æ‰¾å›ï¼Œè¯·æ…é‡è€ƒè™‘     |" << '\n'
+        << "â”œ-----------------------------------------â”¤" << '\n'
+        << "|              æˆ‘ç¡®å®š --> 0               |" << '\n'
+        << "|              ç®—äº†å§ --> 1               |" << '\n'
+        << "â”•-----------------------------------------â”™" << '\n';
     int a;
     enter_safe(a,0,1);
     if (a == 0) {
@@ -80,7 +80,7 @@ void level_delect(string index[], int cnt_level) {
         }
         ofstream fout("index.txt");
         if (!fout) {
-            cout << "´íÎó£ºÎŞ·¨´ò¿ª index ÎÄ¼ş" << '\n';
+            cout << "é”™è¯¯ï¼šæ— æ³•æ‰“å¼€ index æ–‡ä»¶" << '\n';
             return;
         }
         fout << index[0];

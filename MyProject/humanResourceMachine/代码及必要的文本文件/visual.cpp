@@ -11,10 +11,10 @@ void establish(string str[], int m, string inbox[], int max_carpet, string carpe
 		str[i] = str[2];
 		str[i + 1] = str[3];
 		str[i + 2] = str[4];
-	}//»ù±¾µÄ¿ò¼Ü
+	}//åŸºæœ¬çš„æ¡†æ¶
 	str[17] = str[3];
-	//½¨Á¢µØÌº
-	int start = 31 - 5 * carpet_num / 2;//µØÌºÆğµã
+	//å»ºç«‹åœ°æ¯¯
+	int start = 31 - 5 * carpet_num / 2;//åœ°æ¯¯èµ·ç‚¹
 	for (int i = start; i < start + 5 * carpet_num; i += 5) {
 		str[11][i] = '+';
 		str[11][i + 1] = '-';
@@ -32,14 +32,14 @@ void establish(string str[], int m, string inbox[], int max_carpet, string carpe
 		str[13][i + 2] = '-';
 		str[13][i + 3] = '-';
 		str[13][i + 4] = '+';
-	}//forÑ­»·´´½¨µØÌºÂÖÀª
+	}//forå¾ªç¯åˆ›å»ºåœ°æ¯¯è½®å»“
 	for (int i = 0; i < carpet_num; i++) {
-		str[14][start + 2 + 5 * i] = '0' + i;//µØÌºĞòºÅ
+		str[14][start + 2 + 5 * i] = '0' + i;//åœ°æ¯¯åºå·
 	}
-	for (int idx = 0; idx < carpet_num; idx++) {//»¹ÊÇÓ¦¸Ã¿¼ÂÇµØÌº³õÊ¼¾ÍÓĞ¶«Î÷µÄÇé¿ö//±éÀúµØÌº£¬½«ÆäÌîÈë
+	for (int idx = 0; idx < carpet_num; idx++) {//è¿˜æ˜¯åº”è¯¥è€ƒè™‘åœ°æ¯¯åˆå§‹å°±æœ‰ä¸œè¥¿çš„æƒ…å†µ//éå†åœ°æ¯¯ï¼Œå°†å…¶å¡«å…¥
 		switch (carpet[idx].length()) {
 		case 1:
-			str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx] = carpet[idx][0];//×¢ÒâÎ»ÖÃ×ø±ê»»Ëã
+			str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx] = carpet[idx][0];//æ³¨æ„ä½ç½®åæ ‡æ¢ç®—
 			break;
 		case 2:
 			str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx - 1] = carpet[idx][0];
@@ -53,11 +53,11 @@ void establish(string str[], int m, string inbox[], int max_carpet, string carpe
 	}
 }
 
-void bot_creat(string str[], int spot_left, string hand) {//ÈÏÎª»úÆ÷ÈËÔÚÍ¬Ò»Ë®Æ½ÏßÉÏÒÆ¶¯£¬ÉÏµ½0£¬ÏÂµ½9£¬×óµ½spot_left£¬ÓÒµ½spot_left+4//´´½¨Ò»¸ö»úÆ÷ÈË
-	if (hand == "null") {                               //°Ñ»úÆ÷ÈË¿´³ÉÒ»¸ö·½¿é£¬´´½¨ºÍÒÆ¶¯¶¼ÒÔÕâ¸ö·½¿éÎªµ¥Î»½øĞĞ
+void bot_creat(string str[], int spot_left, string hand) {//è®¤ä¸ºæœºå™¨äººåœ¨åŒä¸€æ°´å¹³çº¿ä¸Šç§»åŠ¨ï¼Œä¸Šåˆ°0ï¼Œä¸‹åˆ°9ï¼Œå·¦åˆ°spot_leftï¼Œå³åˆ°spot_left+4//åˆ›å»ºä¸€ä¸ªæœºå™¨äºº
+	if (hand == "null") {                               //æŠŠæœºå™¨äººçœ‹æˆä¸€ä¸ªæ–¹å—ï¼Œåˆ›å»ºå’Œç§»åŠ¨éƒ½ä»¥è¿™ä¸ªæ–¹å—ä¸ºå•ä½è¿›è¡Œ
 		for (int i = 0; i < 5; i++)
 		{
-			str[4][spot_left + i] = '-';//ÓÉÓÚbot_creat³ıÁË¿ªÊ¼´´½¨µØÍ¼Ê±£¬¶¼ÊÇÔÚmoveº¯ÊıÖĞºÍÇå³ıÁ¬ÓÃµÄ£¬ËùÒÔÕâÀïËÆºõ²»ÓÃ¿¼ÂÇÇå³ı
+			str[4][spot_left + i] = '-';//ç”±äºbot_creaté™¤äº†å¼€å§‹åˆ›å»ºåœ°å›¾æ—¶ï¼Œéƒ½æ˜¯åœ¨moveå‡½æ•°ä¸­å’Œæ¸…é™¤è¿ç”¨çš„ï¼Œæ‰€ä»¥è¿™é‡Œä¼¼ä¹ä¸ç”¨è€ƒè™‘æ¸…é™¤
 		}
 		str[5][spot_left] = '|';
 		str[5][spot_left + 1] = '@';
@@ -69,7 +69,7 @@ void bot_creat(string str[], int spot_left, string hand) {//ÈÏÎª»úÆ÷ÈËÔÚÍ¬Ò»Ë®Æ½
 		str[8][spot_left + 1] = '|';
 		str[8][spot_left + 3] = '|';
 	}
-	else {//¿¼ÂÇÁËÊÖÖĞÓĞ¶«Î÷ºÍÃ»ÓĞ¶«Î÷µÄÇé¿ö
+	else {//è€ƒè™‘äº†æ‰‹ä¸­æœ‰ä¸œè¥¿å’Œæ²¡æœ‰ä¸œè¥¿çš„æƒ…å†µ
 		str[0][spot_left] = '+';
 		str[0][spot_left + 1] = '-';
 		str[0][spot_left + 2] = '-';
@@ -113,21 +113,21 @@ void bot_creat(string str[], int spot_left, string hand) {//ÈÏÎª»úÆ÷ÈËÔÚÍ¬Ò»Ë®Æ½
 	}
 }
 
-void move(string str[], int left_spot_start, int left_spot_end, string hand, int ptr_input, int m, instruction input[]) {//»úÆ÷ÈËÔÚÁ½¸öÎ»ÖÃ¼äµÄÒÆ¶¯
+void move(string str[], int left_spot_start, int left_spot_end, string hand, int ptr_input, int m, instruction input[]) {//æœºå™¨äººåœ¨ä¸¤ä¸ªä½ç½®é—´çš„ç§»åŠ¨
 	if (left_spot_start > left_spot_end) {
-		for (int i = 0; i < left_spot_start - left_spot_end; i++) {//Í¨¹ıÑ­»·´´½¨»úÆ÷ÈËÊµÏÖÆäÎ»ÖÃµÄ¸Ä±ä
+		for (int i = 0; i < left_spot_start - left_spot_end; i++) {//é€šè¿‡å¾ªç¯åˆ›å»ºæœºå™¨äººå®ç°å…¶ä½ç½®çš„æ”¹å˜
 			for (int p = 0; p < 10; p++) {
 				for (int j = 0; j < 5; j++) {
-					str[p][left_spot_start - i + 1 + j] = '  ';//°ÑÔ­ÏÈÎ»ÖÃÇå¿Õ
+					str[p][left_spot_start - i + 1 + j] = '  ';//æŠŠåŸå…ˆä½ç½®æ¸…ç©º
 				}
 			}
-			bot_creat(str, left_spot_start - i, hand);//ÔÚĞÂµÄÎ»ÖÃ´´½¨»úÆ÷ÈË
-			print(str, ptr_input, m, input);//´òÓ¡
+			bot_creat(str, left_spot_start - i, hand);//åœ¨æ–°çš„ä½ç½®åˆ›å»ºæœºå™¨äºº
+			print(str, ptr_input, m, input);//æ‰“å°
 			Sleep(60);
-			system("cls");//ÇåÆÁ
+			system("cls");//æ¸…å±
 		}
 	}
-	else {//¿¼ÂÇ×óÒÆºÍÓÒÒÆÁ½ÖÖÇé¿ö
+	else {//è€ƒè™‘å·¦ç§»å’Œå³ç§»ä¸¤ç§æƒ…å†µ
 		for (int i = 0; i < left_spot_end - left_spot_start; i++) {
 			for (int p = 0; p < 10; p++) {
 				for (int j = 0; j < 5; j++) {
@@ -142,14 +142,14 @@ void move(string str[], int left_spot_start, int left_spot_end, string hand, int
 	}
 }
 
-void update_inbox(string str[], int ptr_inbox, string inbox[]) {//¸üĞÂinboxÖĞµÄÄÚÈİ
-	for (int i = 0; i < 6; i++) {//ÏÈ°Ñ¶ÔÓ¦Î»ÖÃÇå¿Õ
+void update_inbox(string str[], int ptr_inbox, string inbox[]) {//æ›´æ–°inboxä¸­çš„å†…å®¹
+	for (int i = 0; i < 6; i++) {//å…ˆæŠŠå¯¹åº”ä½ç½®æ¸…ç©º
 		str[1 + 3 * i][7] = '  ';
 		str[1 + 3 * i][8] = '  ';
 		str[1 + 3 * i][9] = '  ';
 	}
 	for (int i = 0; i < 6; i++) {
-		if (inbox[ptr_inbox + i] != "null") {//ÌîÈëinboxÖĞµÄ¶«Î÷£¬Ö±µ½inboxÖĞµÄ¶«Î÷ÌîÍê»òÕßÌîÂúÁù¸ö
+		if (inbox[ptr_inbox + i] != "null") {//å¡«å…¥inboxä¸­çš„ä¸œè¥¿ï¼Œç›´åˆ°inboxä¸­çš„ä¸œè¥¿å¡«å®Œæˆ–è€…å¡«æ»¡å…­ä¸ª
 			switch (inbox[ptr_inbox + i].length()) {
 			case 1:
 				str[1 + 3 * i][8] = inbox[ptr_inbox + i][0];
@@ -164,17 +164,17 @@ void update_inbox(string str[], int ptr_inbox, string inbox[]) {//¸üĞÂinboxÖĞµÄÄ
 				str[1 + 3 * i][9] = inbox[ptr_inbox + i][2];
 			}
 		}
-	};//¸üĞÂ´«ËÍ´ø
+	};//æ›´æ–°ä¼ é€å¸¦
 }
 
-void update_outbox(int ptr_outbox, string outbox[], string str[]) {//ÌîoutboxµÄÄÚÈİ
+void update_outbox(int ptr_outbox, string outbox[], string str[]) {//å¡«outboxçš„å†…å®¹
 	for (int i = 0; i < 6; i++) {
 		str[1 + 3 * i][53] = '  ';
 		str[1 + 3 * i][54] = '  ';
 		str[1 + 3 * i][55] = '  ';
 	}
 	for (int i = 0; i < 6 && ptr_outbox - i - 1 >= 0; i++) {
-		switch (outbox[ptr_outbox - i - 1].length()) {//·ÅÈëÒ»¸ö£¬ptr_outbox¸üĞÂºó¸ñ×ÓÒ²Òª¸üĞÂ,´ËÊ±ptrÖ¸Ïò¿Õ¸ñ£¬²¢ÇÒÓ¦¸ÃÏòÇ°
+		switch (outbox[ptr_outbox - i - 1].length()) {//æ”¾å…¥ä¸€ä¸ªï¼Œptr_outboxæ›´æ–°åæ ¼å­ä¹Ÿè¦æ›´æ–°,æ­¤æ—¶ptræŒ‡å‘ç©ºæ ¼ï¼Œå¹¶ä¸”åº”è¯¥å‘å‰
 		case 1:
 			str[1 + 3 * i][54] = outbox[ptr_outbox - i - 1][0];
 			break;
@@ -190,13 +190,13 @@ void update_outbox(int ptr_outbox, string outbox[], string str[]) {//ÌîoutboxµÄÄ
 	}
 }
 
-void update_carpet(int idx, string carpet[], string str[], int max_carpet) {//ÌîµØÌºµÄÄÚÈİ
+void update_carpet(int idx, string carpet[], string str[], int max_carpet) {//å¡«åœ°æ¯¯çš„å†…å®¹
 	for (int i = 0; i < 3; i++) {
 		str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx - 1 + i] = '  ';
 	}
 	switch (carpet[idx].length()) {
 	case 1:
-		str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx] = carpet[idx][0];//×¢ÒâÎ»ÖÃ×ø±ê»»Ëã
+		str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx] = carpet[idx][0];//æ³¨æ„ä½ç½®åæ ‡æ¢ç®—
 		break;
 	case 2:
 		str[12][33 - 5 * (max_carpet + 1) / 2 + 5 * idx - 1] = carpet[idx][0];
@@ -209,24 +209,24 @@ void update_carpet(int idx, string carpet[], string str[], int max_carpet) {//Ìî
 	}
 }
 
-void print(string str[], int ptr_input, int m, instruction input[]) {//´òÓ¡µØÍ¼//ÈÎºÎ¸Ä±ä¶¼ÔÚstr[]ÖĞÔËÓÃ¸³Öµ²Ù×÷½øĞĞ£¬ÔÙ´òÓ¡³öÀ´³ÊÏÖ
+void print(string str[], int ptr_input, int m, instruction input[]) {//æ‰“å°åœ°å›¾//ä»»ä½•æ”¹å˜éƒ½åœ¨str[]ä¸­è¿ç”¨èµ‹å€¼æ“ä½œè¿›è¡Œï¼Œå†æ‰“å°å‡ºæ¥å‘ˆç°
 
 	for (int i = 0; i < 24; i++)
 	{
 		cout << str[i];
-		if (i >= 1 && i <= m)//µÚ1µ½µÚmĞĞÊÇÖ¸Áî//Ö¸ÁîÊÜµ½»­ÃæÆª·ùÏŞÖÆ
+		if (i >= 1 && i <= m)//ç¬¬1åˆ°ç¬¬mè¡Œæ˜¯æŒ‡ä»¤//æŒ‡ä»¤å—åˆ°ç”»é¢ç¯‡å¹…é™åˆ¶
 		{
-			if (input[i - 1].op_num == -1) {//op_numÄ¬ÈÏÎª-1£¨Ã»ÓĞ²Ù×÷ÊıÊÇ-1£©
+			if (input[i - 1].op_num == -1) {//op_numé»˜è®¤ä¸º-1ï¼ˆæ²¡æœ‰æ“ä½œæ•°æ˜¯-1ï¼‰
 				if (i == ptr_input + 1) {
-					cout << '>' << ' ' << i << ' ' << input[i - 1].ins << '\n';//Ö¸Ïòµ±Ç°Ö¸Áî
+					cout << '>' << ' ' << i << ' ' << input[i - 1].ins << '\n';//æŒ‡å‘å½“å‰æŒ‡ä»¤
 				}
 				else {
 					cout << "  " << i << ' ' << input[i - 1].ins << '\n';
 				}
 			}
-			else {//ÓĞ²Ù×÷Êı
+			else {//æœ‰æ“ä½œæ•°
 				if (i == ptr_input + 1) {
-					cout << '>' << ' ' << i << ' ' << input[i - 1].ins << ' ' << input[i - 1].op_num << '\n';//Ö¸Ïòµ±Ç°Ö¸Áî
+					cout << '>' << ' ' << i << ' ' << input[i - 1].ins << ' ' << input[i - 1].op_num << '\n';//æŒ‡å‘å½“å‰æŒ‡ä»¤
 				}
 				else {
 					cout << "  " << i << ' ' << input[i - 1].ins << ' ' << input[i - 1].op_num << '\n';
@@ -234,7 +234,7 @@ void print(string str[], int ptr_input, int m, instruction input[]) {//´òÓ¡µØÍ¼/
 			}
 		}
 		else {
-			cout << '\n';//Ã»ÓĞÖ¸ÁîÒ²ĞèÒª×ªĞĞ
+			cout << '\n';//æ²¡æœ‰æŒ‡ä»¤ä¹Ÿéœ€è¦è½¬è¡Œ
 		}
 	}
 }
