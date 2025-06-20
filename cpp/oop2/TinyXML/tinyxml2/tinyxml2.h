@@ -23,7 +23,16 @@ distribution.
 
 #ifndef TINYXML2_INCLUDED
 #define TINYXML2_INCLUDED
+//!头文件保护
 
+//!头文件包含，为了兼容不同平台，设置不同的编译选项
+/*如果是在以下平台之一编译：
+ANDROID_NDK（安卓 NDK 开发）
+BORLANDC（Borland 编译器）
+QNXNTO（嵌入式实时系统 QNX）
+则采用c风格的头文件处理，其他主流平台采用c++风格头文件
+*/
+//!不采用stl，仅采用c/c++基础的头文件，实现低依赖和可移植性
 #if defined(ANDROID_NDK) || defined(__BORLANDC__) || defined(__QNXNTO__)
 #   include <ctype.h>
 #   include <limits.h>
@@ -50,17 +59,22 @@ distribution.
         AStyle.exe --style=1tbs --indent-switches --break-closing-brackets --indent-preprocessor tinyxml2.cpp tinyxml2.h
 */
 
+//!如果当前处于编译调试阶段（如 MSVC 的 _DEBUG 或 GCC 的 __DEBUG__ 被定义），则定义TINYXML2_DEBUG，开启调试状态
 #if defined( _DEBUG ) || defined (__DEBUG__)
 #   ifndef TINYXML2_DEBUG
 #       define TINYXML2_DEBUG
 #   endif
 #endif
 
+
+//!如果使用 Microsoft 编译器（MSVC）,关闭 4251 警告：“class needs to have dll-interface...”
+
 #ifdef _MSC_VER
 #   pragma warning(push)
 #   pragma warning(disable: 4251)
 #endif
 
+//!3. 导出符号定义（跨平台共享库支持）
 #ifdef _MSC_VER
 #   ifdef TINYXML2_EXPORT
 #       define TINYXML2_LIB __declspec(dllexport)
@@ -96,6 +110,8 @@ distribution.
 /* Versioning, past 1.0.14:
 	http://semver.org/
 */
+
+//!定义 TinyXML2 当前源码的版本号：v11.0.0
 static const int TIXML2_MAJOR_VERSION = 11;
 static const int TIXML2_MINOR_VERSION = 0;
 static const int TIXML2_PATCH_VERSION = 0;
@@ -109,7 +125,11 @@ static const int TIXML2_PATCH_VERSION = 0;
 // system, and the capacity of the stack. On the other hand, it's a trivial
 // attack that can result from ill, malicious, or even correctly formed XML,
 // so there needs to be a limit in place.
+//!防止递归深度过大而导致栈溢出，所以人为设置了一个最大深度限制
 static const int TINYXML2_MAX_ELEMENT_DEPTH = 500;
+
+
+//!---------------------以上基本都是一些宏定义和保护措施，不涉及具体类的设计----------------------
 
 namespace tinyxml2
 {
@@ -121,6 +141,7 @@ class XMLText;
 class XMLDeclaration;
 class XMLUnknown;
 class XMLPrinter;
+//!TINYXML2_LIB是一个宏，用于控制不同平台下的导出行为
 
 /*
 	A class that wraps strings. Normally stores the start and end
@@ -130,13 +151,16 @@ class XMLPrinter;
 
     Isn't clear why TINYXML2_LIB is needed; but seems to fix #719
 */
+
+//!管理和处理 XML 中字符串片段 的核心工具类。
+//!这个类封装了一段字符串的起始指针，同时根据解析上下文控制对字符串的 换行处理、实体转义、空白折叠等操作。
 class TINYXML2_LIB StrPair
 {
 public:
-    enum Mode {
+    enum Mode {//枚举类型
         NEEDS_ENTITY_PROCESSING			= 0x01,
         NEEDS_NEWLINE_NORMALIZATION		= 0x02,
-        NEEDS_WHITESPACE_COLLAPSING     = 0x04,
+        NEEDS_WHITESPACE_COLLAPSING     = 0x04,//处理模式的枚举
 
         TEXT_ELEMENT		            = NEEDS_ENTITY_PROCESSING | NEEDS_NEWLINE_NORMALIZATION,
         TEXT_ELEMENT_LEAVE_ENTITIES		= NEEDS_NEWLINE_NORMALIZATION,
@@ -158,7 +182,7 @@ public:
         _flags  = flags | NEEDS_FLUSH;
     }
 
-    const char* GetStr();
+    const char* GetStr();//返回处理后的字符串
 
     bool Empty() const {
         return _start == _end;
@@ -169,7 +193,7 @@ public:
         _start = const_cast<char*>(str);
     }
 
-    void SetStr( const char* str, int flags=0 );
+    void SetStr( const char* str, int flags=0 );//设置一个字符串，记录字符串的起点，终点和处理模式
 
     char* ParseText( char* in, const char* endTag, int strFlags, int* curLineNumPtr );
     char* ParseName( char* in );
@@ -182,52 +206,57 @@ private:
 
     enum {
         NEEDS_FLUSH = 0x100,
-        NEEDS_DELETE = 0x200
+        NEEDS_DELETE = 0x200//内部状态的枚举
     };
 
-    int     _flags;
-    char*   _start;
-    char*   _end;
+    int     _flags;//控制字符串是否需要处理（删除，转义，刷新）
+    char*   _start;//指向字符串起始位置的指针
+    char*   _end;//指向字符串结束位置的指针
 
     StrPair( const StrPair& other );	// not supported
     void operator=( const StrPair& other );	// not supported, use TransferTo()
 };
-
+//!------------------------------上面的StrPair类是对字符串的相关处理操作-------------------------------
 
 /*
 	A dynamic array of Plain Old Data. Doesn't support constructors, etc.
 	Has a small initial memory pool, so that low or no usage will not
 	cause a call to new/delete
 */
-template <class T, size_t INITIAL_SIZE>
+
+//!-----------------------------DynArray是TinyXml2中自己实现的一个动态数组-----------------------------
+//功能类似std::vector
+//轻量无依赖：不使用 STL，适配嵌入式平台或非 C++ 标准库环境。
+//高性能：初始化时使用预分配的栈内存 _pool，避免小数组频繁堆分配。
+template <class T, size_t INITIAL_SIZE>//!使用了类模板，支持各种类型数据
 class DynArray
 {
 public:
     DynArray() :
-        _mem( _pool ),
+        _mem( _pool ),//初始使用的内存是栈上的小数组_pool
         _allocated( INITIAL_SIZE ),
         _size( 0 )
     {
     }
 
     ~DynArray() {
-        if ( _mem != _pool ) {
+        if ( _mem != _pool ) {//如果使用的数组不是栈上的，则释放堆上的内存
             delete [] _mem;
         }
     }
 
-    void Clear() {
+    void Clear() {//清除
         _size = 0;
     }
 
-    void Push( T t ) {
+    void Push( T t ) {//添加元素
         TIXMLASSERT( _size < INT_MAX );
         EnsureCapacity( _size+1 );
         _mem[_size] = t;
         ++_size;
     }
 
-    T* PushArr( size_t count ) {
+    T* PushArr( size_t count ) {//添加多个元素
         TIXMLASSERT( _size <= SIZE_MAX - count );
         EnsureCapacity( _size+count );
         T* ret = &_mem[_size];
@@ -235,22 +264,22 @@ public:
         return ret;
     }
 
-    T Pop() {
+    T Pop() {//弹出元素
         TIXMLASSERT( _size > 0 );
         --_size;
         return _mem[_size];
     }
 
-    void PopArr( size_t count ) {
+    void PopArr( size_t count ) {//弹出多个元素
         TIXMLASSERT( _size >= count );
         _size -= count;
     }
 
-    bool Empty() const					{
+    bool Empty() const					{//判断数组是否为空
         return _size == 0;
     }
 
-    T& operator[](size_t i) {
+    T& operator[](size_t i) {//获取元素
         TIXMLASSERT( i < _size );
         return _mem[i];
     }
@@ -295,7 +324,7 @@ private:
     DynArray( const DynArray& ); // not supported
     void operator=( const DynArray& ); // not supported
 
-    void EnsureCapacity( size_t cap ) {
+    void EnsureCapacity( size_t cap ) {//扩容函数，如果容量不够，则扩出两倍的容量，并将原数据迁移
         TIXMLASSERT( cap > 0 );
         if ( cap > _allocated ) {
             TIXMLASSERT( cap <= SIZE_MAX / 2 / sizeof(T));
@@ -311,10 +340,11 @@ private:
         }
     }
 
-    T*  _mem;
-    T   _pool[INITIAL_SIZE];
-    size_t _allocated;		// objects allocated
-    size_t _size;			// number objects in use
+    T*  _mem;//当前使用的内存地址
+    T   _pool[INITIAL_SIZE];//这是一个栈上的小数组，因为想要在堆上创建一个数组的开销是比较大的，
+    //所以在数据量较小的情况下先使用栈上创建的小数组，等到使用的内存量大于该数组后再使用堆上的数组
+    size_t _allocated;		// objects allocated     分配的总容量
+    size_t _size;			// number objects in use   元素数量
 };
 
 
@@ -322,6 +352,13 @@ private:
 	Parent virtual class of a pool for fast allocation
 	and deallocation of objects.
 */
+
+//!--------------------------内存池基类（使用了类的继承和多态！！！）------------------------------
+//内存池用于分配和释放许多小而频繁使用的内存
+/*在解析 XML 文档时，会频繁创建大量小对象（节点、文本、属性等），如果每次用 new/delete 来分配和释放：
+会导致大量系统开销（慢！）
+会产生堆碎片（不连续内存，影响性能）
+会变慢或甚至泄漏*/
 class MemPool
 {
 public:
@@ -333,11 +370,19 @@ public:
     virtual void Free( void* ) = 0;
     virtual void SetTracked() = 0;
 };
-
+//!设计内存池基类的目的：
+//!解析器中有多个不同的对象会需要使用内存池，设计内存池基类就可以通过基类的指针来同一管理所有的内存池
+//!比如说使用基类指针数组来管理当前创建的所有内存池，方便资源的同一管理和释放，如下例：
+/*MemPool* pools[] = { &_elementPool, &_textPool, &_nodePool };
+for (int i = 0; i < 3; ++i) {
+    pools[i]->Clear();  // 多态调用，每个池自己释放资源
+}*/
+//!体现了面向对象设计中的开闭原则：如果想要对池加入其他功能，只要继承即可
 
 /*
 	Template child class to create pools of the correct type.
 */
+//模板子列，用于创建指定类型的池
 template< size_t ITEM_SIZE >
 class MemPoolT : public MemPool
 {
@@ -473,6 +518,7 @@ private:
 
 	@sa XMLNode::Accept()
 */
+//!这里涉及设计模式：访问者模式
 class TINYXML2_LIB XMLVisitor
 {
 public:
@@ -543,6 +589,12 @@ enum XMLError {
 /*
 	Utility functionality.
 */
+/*
+!这是 TinyXML2 中的工具类 XMLUtil，它是一个 纯静态工具类，不需要创建对象，提供 XML 解析与序列化过程中常用的辅助函数，涵盖：
+空白字符处理
+字符串对比与判断
+编码转换（如 UTF-8、字符实体）
+字符串与数值之间的转换*/
 class TINYXML2_LIB XMLUtil
 {
 public:
@@ -666,6 +718,7 @@ private:
 
 	@endverbatim
 */
+//!节点的抽象基类，text,comment,unknown,declaration,document,element由其派生而来
 class TINYXML2_LIB XMLNode
 {
     friend class XMLDocument;
@@ -673,6 +726,7 @@ class TINYXML2_LIB XMLNode
 public:
 
     /// Get the XMLDocument that owns this XMLNode.
+    //获取当前节点所在的document节点
     const XMLDocument* GetDocument() const	{
         TIXMLASSERT( _document );
         return _document;
@@ -682,7 +736,10 @@ public:
         TIXMLASSERT( _document );
         return _document;
     }
-
+    //!类型转换函数，将基类指针转换尾子类指针
+    //!实现原理：类型转换函数是虚函数，在具体派生类中会重写为return this,
+    //!这样通过父类指针调用转换函数，就会根据指向的实际类型来返回对应的指针
+    //避免使用 dynamic_cast，提高可移植性和效率
     /// Safely cast to an Element, or null.
     virtual XMLElement*		ToElement()		{
         return 0;
@@ -930,6 +987,7 @@ public:
     	const char* xmlcstr = printer.CStr();
     	@endverbatim
     */
+   //!访问者模式接口
     virtual bool Accept( XMLVisitor* visitor ) const = 0;
 
 	/**
@@ -952,21 +1010,23 @@ protected:
 
     virtual char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr);
 
-    XMLDocument*	_document;
-    XMLNode*		_parent;
-    mutable StrPair	_value;
+    XMLDocument*	_document;//指向当前节点所处的文档树的根节点的指针
+    //!XMLDocument是整个xml文档树结构的根节点，用于管理xml文档树中的所有节点
+    XMLNode*		_parent;//父指针
+    mutable StrPair	_value;//节点的值，StrPair是封装好的字符串管理类，有指向字符串起点和终点的指针，同时封装了字符串处理相关方法
     int             _parseLineNum;
 
-    XMLNode*		_firstChild;
-    XMLNode*		_lastChild;
-
+    XMLNode*		_firstChild;//指向第一个子节点
+    XMLNode*		_lastChild;//指向最后一个子节点
+    //方便子节点的头插和尾插，方便遍历子节点（双向链表结构）
     XMLNode*		_prev;
-    XMLNode*		_next;
+    XMLNode*		_next;//指向兄弟节点的指针
+    //!通过这两个指针使得同一层节点构成了双向链表
 
 	void*			_userData;
 
 private:
-    MemPool*		_memPool;
+    MemPool*		_memPool;//指向用于该节点类型的内存池
     void Unlink( XMLNode* child );
     static void DeleteNode( XMLNode* node );
     void InsertChildPreamble( XMLNode* insertThis ) const;
@@ -989,6 +1049,7 @@ private:
 	you generally want to leave it alone, but you can change the output mode with
 	SetCData() and query it with CData().
 */
+//!-----------------------表示文本内容-------------------------------
 class TINYXML2_LIB XMLText : public XMLNode
 {
     friend class XMLDocument;
@@ -1027,7 +1088,7 @@ private:
     XMLText& operator=( const XMLText& );	// not supported
 };
 
-
+//!---------------------------表示注释----------------------------------
 /** An XML Comment. */
 class TINYXML2_LIB XMLComment : public XMLNode
 {
@@ -1068,6 +1129,7 @@ private:
 	The text of the declaration isn't interpreted. It is parsed
 	and written as a string.
 */
+//!---------------------------表示声明----------------------------------
 class TINYXML2_LIB XMLDeclaration : public XMLNode
 {
     friend class XMLDocument;
@@ -1103,6 +1165,7 @@ private:
 
 	DTD tags get thrown into XMLUnknowns.
 */
+//!---------------------------表示未知的标签----------------------------------
 class TINYXML2_LIB XMLUnknown : public XMLNode
 {
     friend class XMLDocument;
@@ -1138,6 +1201,7 @@ private:
 	@note The attributes are not XMLNodes. You may only query the
 	Next() attribute in a list.
 */
+//!---------------------------表示属性----------------------------------
 class TINYXML2_LIB XMLAttribute
 {
     friend class XMLElement;
@@ -1262,16 +1326,19 @@ private:
 	and can contain other elements, text, comments, and unknowns.
 	Elements also contain an arbitrary number of attributes.
 */
+//!---------------------------表示一个节点----------------------------------
+//一个完整节点包含标签名，属性，内容，子节点
+//也就是从始标签到结束标签的除了注释以外的内容
 class TINYXML2_LIB XMLElement : public XMLNode
 {
     friend class XMLDocument;
 public:
     /// Get the name of an element (which is the Value() of the node.)
-    const char* Name() const		{
+    const char* Name() const		{//获取名字
         return Value();
     }
     /// Set the name of the element.
-    void SetName( const char* str, bool staticMem=false )	{
+    void SetName( const char* str, bool staticMem=false )	{//这只名字
         SetValue( str, staticMem );
     }
 
@@ -1281,7 +1348,7 @@ public:
     virtual const XMLElement* ToElement() const override {
         return this;
     }
-    virtual bool Accept( XMLVisitor* visitor ) const override;
+    virtual bool Accept( XMLVisitor* visitor ) const override;//访问者
 
     /** Given an attribute name, Attribute() returns the value
     	for the attribute of that name, or null if none
@@ -1306,6 +1373,7 @@ public:
     	}
     	@endverbatim
     */
+   //属性相关操作
     const char* Attribute( const char* name, const char* value=0 ) const;
 
     /** Given an attribute name, IntAttribute() returns the value
@@ -1546,6 +1614,7 @@ public:
     	@endverbatim
     	GetText() will return "This is ".
     */
+   //!text相关操作
     const char* GetText() const;
 
     /** Convenience function for easy access to the text inside an element. Although easy
@@ -1657,6 +1726,7 @@ public:
         Convenience method to create a new XMLElement and add it as last (right)
         child of this node. Returns the created and inserted element.
     */
+   //!加入新的子节点，注释，内容等
     XMLElement* InsertNewChildElement(const char* name);
     /// See InsertNewChildElement()
     XMLComment* InsertNewComment(const char* comment);
@@ -1715,6 +1785,8 @@ enum Whitespace {
 	All Nodes are connected and allocated to a Document.
 	If the Document is deleted, all its Nodes are also deleted.
 */
+//!document是根节点，用于管理整个xml树
+//!同一创建，管理，销毁xml中的各种元素
 class TINYXML2_LIB XMLDocument : public XMLNode
 {
     friend class XMLElement;
@@ -1749,6 +1821,8 @@ public:
     	specified, TinyXML-2 will assume 'xml' points to a
     	null terminated string.
     */
+   //!采用枚举类型XMLError作为函数返回值，用于返回错误码，方便发现错误和调试
+   //!从字符串中解析xml
     XMLError Parse( const char* xml, size_t nBytes=static_cast<size_t>(-1) );
 
     /**
@@ -1756,6 +1830,7 @@ public:
     	Returns XML_SUCCESS (0) on success, or
     	an errorID.
     */
+   //!从文件中加载并解析xml
     XMLError LoadFile( const char* filename );
 
     /**
@@ -1776,7 +1851,9 @@ public:
     	Returns XML_SUCCESS (0) on success, or
     	an errorID.
     */
+   //!将当前的document以xml文件的格式保存到文件中
     XMLError SaveFile( const char* filename, bool compact = false );
+    //!这里savefile其实是对后面printf类的封装，在savefile中创建了一个printf对象，并且调用相关函数进行输出
 
     /**
     	Save the XML file to disk. You are responsible
@@ -1786,7 +1863,7 @@ public:
     	an errorID.
     */
     XMLError SaveFile( FILE* fp, bool compact = false );
-
+    //!相关配置
     bool ProcessEntities() const		{
         return _processEntities;
     }
@@ -1833,6 +1910,8 @@ public:
     void Print( XMLPrinter* streamer=0 ) const;
     virtual bool Accept( XMLVisitor* visitor ) const override;
 
+
+    //!创建xml的各种元素，将这些元素和其对应的内存池同一交给document管理
     /**
     	Create a new Element associated with
     	this Document. The memory for the Element
@@ -2051,6 +2130,11 @@ inline NodeType* XMLDocument::CreateUnlinkedNode( MemPoolT<PoolElementSize>& poo
 
 	See also XMLConstHandle, which is the same as XMLHandle, but operates on const objects.
 */
+
+//!是 TinyXML2 中的一个辅助类，用于对 XML DOM 结构中的节点（XMLNode）进行更安全、简洁、容错性更强的链式访问封装。
+//!如果直接使用XMLNode中的相关成员函数进行访问，那么要考虑空指针等问题，需要添加很多检查，比较麻烦
+//!而XMLHandle类则将访问相关的成员函数封装起来，使得访问更加方便安全
+//!体现了外观模式，将复杂的访问逻辑封装成一个类，并提供更加简化安全的访问接口
 class TINYXML2_LIB XMLHandle
 {
 public:
@@ -2236,6 +2320,20 @@ private:
 	printer.CloseElement();
 	@endverbatim
 */
+//!继承了XMLVisitor，用于输出（序列化）XML 文档
+//前面提到的XMLDocument::saveFile就封装了创建该类对象并调用该类函数的过程
+/*bool XMLDocument::Accept( XMLVisitor* visitor ) const
+{
+    TIXMLASSERT( visitor );
+    if ( visitor->VisitEnter( *this ) ) {
+        for ( const XMLNode* node=FirstChild(); node; node=node->NextSibling() ) {
+            if ( !node->Accept( visitor ) ) {
+                break;
+            }
+        }
+    }
+    return visitor->VisitExit( *this );
+}*/
 class TINYXML2_LIB XMLPrinter : public XMLVisitor
 {
 public:

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <system config:env="production"   <!-- 缺少关闭的引号与标签结束 -->
+    <database>
+      <primary host="db1.company.com">
+    </database>
+</application>

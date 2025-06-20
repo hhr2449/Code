@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--this is a comment-->
+<university name="tsinghua university" established="1911">
+    <department1 name="computer science" studentNum="210">
+        <!--this is the department of computer science-->
+        <course>oop</course>
+        <professor1 name="liu">Atificial Intelligence</professor1>
+    </department1>
+    <department2 name="math" studentNum="50">
+        <!--this is the department of math-->
+        <course>calcular</course>
+        <professor1 name="yao">calcular</professor1>
+    </department2>
+    <library open="true">This library opens from 8AM to 10PM.
+Books on AI, Math, Physics are available.</library>
+</university>
