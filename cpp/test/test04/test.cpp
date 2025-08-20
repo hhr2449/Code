@@ -1,33 +1,19 @@
  #include <iostream>
  using namespace std;
-
- class Base {
+ class A{
+    int value;
  public:
-     virtual void print() {
-         cout << "Base class" << endl;
-     }
+     A(int value) : value(value) {}
+     int getValue() { return value; }
  };
 
- class Derived : public Base {
- public:
-     void print() override {
-         cout << "Derived class" << endl;
-     }
- };
+ void swap(A& x, A& y) {
+    A temp = x;
+    x = y;
+    y = temp;
+ }
 
- int main() {
-     Base* base = new Base();
-     Derived* derived = new Derived();
-
-     Base* bp = dynamic_cast<Base*>(derived);
-     //将derived转换为Base*类型，即向上类型转换
-     Derived* dp = static_cast<Derived*>(base);
-    //将base转换为Derived*类型，即向下类型转换
-     bp->print();
-     dp->print();
-
-     delete base;
-     delete derived;
-
-     return 0;
+ int main() {    
+   cout << "hello world" << '\n';
+    return 0;
  }

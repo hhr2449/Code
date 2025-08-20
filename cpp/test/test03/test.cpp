@@ -1,19 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main() {
-    string fileName = "test.xml";
-    ifstream ifs(fileName);
-    if(!ifs) {
-        //如果没有打开文件，则抛出异常并且输出错误信息
-        ostringstream info;
-        info << "file not found!" << "fileName:" << fileName << '\n'; 
-        throw runtime_error(info.str());
+    string s = "1  ";
+    int i = 0;
+    char tmp = s[i];
+    while(tmp == ' ' && i < s.size()) {
+        i++;
+        tmp = s[i];
     }
-    ostringstream buf;
-    char ch;
-    while(ifs.get(ch)) {
-        buf << ch;
-    }
-    string Pstr = buf.str();
-    cout << Pstr;
+    //截取子串，从下标i处开始，截取到末尾
+    s = s.substr(i);
+    cout << s.size() << endl;
 }

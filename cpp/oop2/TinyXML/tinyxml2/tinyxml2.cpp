@@ -2423,7 +2423,6 @@ XMLError XMLDocument::SaveFile( const char* filename, bool compact )
         SetError( XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=<null>" );
         return _errorID;
     }
-
     FILE* fp = callfopen( filename, "w" );
     if ( !fp ) {
         SetError( XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=%s", filename );
