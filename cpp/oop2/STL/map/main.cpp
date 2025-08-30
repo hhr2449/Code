@@ -22,4 +22,8 @@ int main() {
     //如果键为key的元素已经存在，则不会建立新的键值对，还是保持原样不变
     s.insert(make_pair("Monday", 100));
     cout << s["Monday"] << '\n';
+    //map可以使用适配器进行遍历
+    for(auto it = s.begin(); it != s.end(); it++) {
+        cout << (*it).first << (*it).second << '\n';
+    }
 }
