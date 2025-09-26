@@ -8,7 +8,7 @@ using namespace MyXml;
 //测试Xml类
 void test1() {
     cout << "------------测试构造函数,设置获取name,content,attri等操作-------------" << endl;
-    MyXml::Xml root("students");
+    MyXml::Xml root((string)"students");
     std::cout << root.getName() << std::endl;
     root.setName("DaMing");
     root.setContent("大明是日本的大名");
@@ -19,17 +19,17 @@ void test1() {
     cout << "------------测试序列化输出节点功能-------------" << endl;
     std::cout << root.output() << std::endl;
     cout << "------------测试添加子节点功能-------------" << endl;
-    MyXml::Xml child("xiaoming");
+    MyXml::Xml child((string)"xiaoming");
     child.setContent("小明是大明的儿子");
     child.setAttri("name", "xiaoming");
     child.setAttri("age", "10");
-    MyXml::Xml child2("xiaohong");
+    MyXml::Xml child2((string)"xiaohong");
     child2.setContent("小红是大明的女儿");
     child2.setAttri("name", "xiaohong");
     child2.setAttri("age", "8");
     root.addChild(child);
     root.addChild(child2);
-    MyXml::Xml grandChild("xiaomingchild");
+    MyXml::Xml grandChild((string)"xiaomingchild");
     grandChild.setContent("小明是小明大明");
     grandChild.setAttri("name", "xiaomingchild");
     root[0].addChild(grandChild);//!注意XmlChild里面储存的是对象而非指针，所以这里修改child不会影响根节点（改变成储存指针是否更好？？？）
@@ -78,8 +78,8 @@ void test3() {
     std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
 }
 int main() {
-    //test1();
-    //test2();
-    test3();
+    test1();
+    test2();
+    //test3();
     //解析test2.xml 一万次大约用时2450ms.
 }
